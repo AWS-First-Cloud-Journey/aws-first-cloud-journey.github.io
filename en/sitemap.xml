@@ -2,18 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/"
-                />
-  </url><url>
     <loc>/1-awsarchitectureblog/1.1-blog-1/</loc>
     <priority>0</priority>
     <xhtml:link
@@ -27,32 +15,6 @@
                 href="/1-awsarchitectureblog/1.1-blog-1/"
                 />
   </url><url>
-    <loc>/1-awsarchitectureblog/1.2-blog-2/</loc>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/1-awsarchitectureblog/1.2-blog-2/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/1-awsarchitectureblog/1.2-blog-2/"
-                />
-  </url><url>
-    <loc>/1-awsarchitectureblog/1.3-blog-3/</loc>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/1-awsarchitectureblog/1.3-blog-3/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/1-awsarchitectureblog/1.3-blog-3/"
-                />
-  </url><url>
     <loc>/1-awsarchitectureblog/</loc>
     <priority>0</priority>
     <xhtml:link
@@ -64,6 +26,58 @@
                 rel="alternate"
                 hreflang="en"
                 href="/1-awsarchitectureblog/"
+                />
+  </url><url>
+    <loc>/2-windowsonaws/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/2-windowsonaws/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/2-windowsonaws/"
+                />
+  </url><url>
+    <loc>/3-networkingonaws/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/3-networkingonaws/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/3-networkingonaws/"
+                />
+  </url><url>
+    <loc>/4-dataanalytics/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/4-dataanalytics/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/4-dataanalytics/"
+                />
+  </url><url>
+    <loc>/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
                 />
   </url><url>
     <loc>/categories/</loc>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.99.1" />
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây :: THIẾT LẬP VPC PEERING</title>
+
+    
+    <link href="/css/nucleus.css?1655199306" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1655199306" rel="stylesheet">
+    <link href="/css/hybrid.css?1655199306" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1655199306" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1655199306" rel="stylesheet">
+    <link href="/css/auto-complete.css?1655199306" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1655199306" rel="stylesheet">
+    <link href="/css/theme.css?1655199306" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1655199306" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1655199306" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1655199306"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.2-blog-2/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1655199306"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1655199306"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1655199306"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/" title="1-AWSVietnameseBlogs" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/">
+          1-AWSVietnameseBlogs
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/" title="AWS Architecture Blog" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/">
+           <b> 1. </b> AWS Architecture Blog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.1-blog-1/" title="Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.1-blog-1/">
+          Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.2-blog-2/" title="Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.2-blog-2/">
+          Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.3-blog-3/" title="Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.3-blog-3/">
+          Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.2-windowsonaws/" title="Windows on AWS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.2-windowsonaws/">
+           <b> 2. </b> Windows on AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.2-blog-2/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.2-blog-2/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=8002351&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>14-06-2022</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+            <i> <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng </a> <br>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>AWS Vietnamese Blog</a> > <a href='/vi/1-awsvietnameseblog/'>1-AWSVietnameseBlogs</a> > <a href='/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/'>AWS Architecture Blog</a> > Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây
+            </h1>
+          
+
+        
+
+
+
+	<h4 id="khởi-chạy-microsoft-windows-server-instances-trên-amazon-ec2-nhanh-hơn-tới-65-so-với-trước-đây">Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây</h4>
+<ol>
+<li>GIỚI THIỆU
+Khách hàng của AWS khi chạy Microsoft Windows Server instances phải đối mặt với việc thời gian chờ đợi lâu trong khi chờ cấp phép instances, vì Windows Server Operating System (OS) trải qua một quá trình khởi động kéo dài. 
+Đối với các nhà phát triển và chuyên gia CNTT, điều này sẽ gây khó khăn cho việc deployment và đảm bảo SLAs của hệ thống dịch vụ (Service Level Agreements – viết tắt là SLAs). Khi cần sử dụng SLAs ở mức độ cao với khối lượng công việc quan trọng nhiều, các chuyên gia CNTT  thường yêu cầu cung cấp tài nguyên nhanh hơn, đồng thời tránh vượt quá chi phí. Việc cung cấp tài nguyên nhanh hơn và đáng tin cậy hơn có thể đáp ứng các yêu cầu khắt khe về thời gian của các ứng dụng và dịch vụ quan trọng trong việc mở rộng quy mô hoặc phục hồi hệ thống.</li>
+</ol>
+<p>AWS đã công bố chức năng mới đó là khởi tạo mày chủ Amazon Elastic Compute Cloud (Amazon EC2) chạy Microsoft Windows Server OS với tốc độ nhanh hơn 65% so với trước đây. Khách hàng có thể sử dụng chức năng này cho cả các stock AMIs (được quản lý bởi AWS) và custom Amazon Machine Images (AMIs). 
+Đối với custom AMIs, thời gian khởi chạy giảm xuống còn khoảng 85 giây so với thông thường là 242 giây và đối với stock AMIs, thời gian khởi chạy đạt được khoảng 45 giây. Bằng cách khởi chạy Windows instances nhanh hơn, tính năng mới giúp cung cấp kịp thời instances trên quy mô lớn, SLAs sẽ được cải thiện trong việc hỗ trợ các yêu cầu triển khai tăng đột biến và phản hồi nhanh hơn trong việc đáp ứng các yêu cầu khôi phục dịch vụ hoặc các yêu cầu về chuyển đổi sang hệ thống chờ. ( fail-over)</p>
+<p>Trong bài đăng trên blog này, chúng tôi sẽ giới thiệu cho bạn một số trường hợp sử dụng cho chức năng khởi chạy nhanh hơn này và cung cấp quy trình chi tiết từng bước để kích hoạt nó trên AMIs của bạn thông qua bản điều khiển Amazon EC2 hoặc AWS Command Line Interface (CLI) hoặc Application Programming Interface (API).</p>
+<p>1.1 USE CASES</p>
+<p>Việc khởi chạy nhanh các custom Windows AMIs giúp đáp ứng yêu cầu đối với các trường hợp nhạy cảm về thời gian hoặc nhu cầu cao, nơi thời gian khởi chạy là yếu tố  quan trọng để thành công. Các phần mềm custom Windows AMIs thường chạy, chẳng hạn như Microsoft SharePoint, Microsoft Dynamics CRM, Microsoft Active Directory hoặc một ứng dụng NET-based custom được triển khai trên Windows Server hoặc trên Microsoft Internet Information Server (IIS). Sau đây là một số trường hợp sử dụng mà tinh năng khởi chạy nhanh hơn cho các AMI tuỳ chỉnh có thể được tận dụng.</p>
+<p>1.2 SCALABLE DEPLOYMENT</p>
+<p>Việc triển khai khối lượng công việc có thể mở rộng giúp đáp ứng nhu cầu tài nguyên luôn biến động và tối ưu hóa hiệu suất chi phí on-demand, sử dụng tối ưu tài nguyên. Một trong những trường hợp sử dụng là phục vụ những sự kiện cần thời gian triển khai nhanh , với qui mô lớn, chẳng hạn dịch chuyển ứng dụng với qui mô lớn, các sự kiện xã hội hoặc công ty, bầu cử của một quốc gia,….. Một trường hợp sử dụng khác là nó giúp chúng ta xử lý hàng loạt công việc như là để xử lý dữ liệu hàng ngày, hàng tuần hoặc xử lý hàng tháng đối với quá trình nhập, lọc và quản lý dữ liệu. Mở rộng kịp thời custom Windows AMI-based EC2 là rất quan trọng cho sự thành công của các sự kiện này. Tính năng khởi chạy nhanh hơn của Windows giúp mở rộng quy mô khi khởi chạy instance EC2 nhanh hơn.</p>
+<p>1.3 DISASTER RECOVERY (DR)</p>
+<p>Khách hàng có thể triển khai kế hoạch khôi phục sau thảm họa trong các cấu hình sao lưu và khôi phục, Pilot Light hoặc Warm Standby configurations. Khách hàng có thể triển khai khi sử dụng custom Windows AMIs với Microsoft stack of software, such as SharePoint, Dynamics CRM, etc. Với việc khởi chạy nhanh các instance EC2 tại trang DR là điều quan trọng để đáp ứng Recovery Time Objective (viết tắt là RTO). Tính năng khởi chạy nhanh hơn của Windows giúp đáp ứng yêu cầu RTO cho chiến lược triển khai.</p>
+<p>1.4 FAILOVER</p>
+<p>Nhiều phần mềm của bên thứ 3 hoặc các giải pháp đối tác AWS sử dụng cơ chế phân cụm chủ động-thụ động để giải quyết yêu cầu chuyển lỗi. Khi (các) cá thể EC2 chủ động không khả dụng, (các) cá thể EC2 thụ động sẽ tiếp quản và trở nên hoạt động. Hầu hết các cấu hình này sử dụng Windows AMI tùy chỉnh chạy phần mềm Microsoft hoặc các giải pháp đối tác AWS sử dụng phần mềm của Microsoft. Khôi phục nhanh hơn (các) instance EC2 thụ động giúp dịch vụ tiếp tục hoạt động. Tính năng khởi chạy nhanh của Windows đẩy nhanh thời gian phục hồi trạng thái hoạt động của cluster dịch vụ.</p>
+<p>1.5. TÓM TẮT TÍNH NĂNG</p>
+<p>Khởi chạy Windows nhanh hơn khả dụng cho cả stock AMIs (AWS tối ưu hóa trước 20 hình ảnh phổ biến nhất do Amazon quản lý) và custom Windows AMIs.</p>
+<ul>
+<li>Đối với stock AMIs, nó có sẵn ngay từ đầu và đối với custom AMIs, cần phải có cấu hình tối ưu hóa image.</li>
+<li>Custom AMIs được định cấu hình để tối ưu hóa image bằng AWS Management Console, AWS CLI, API, hoặc Amazon EC2 Image Builder.</li>
+<li>Khi có ý định cấu hình custom AMIs để tối ưu hóa image , bạn cần chọn Enable Windows faster launching và cũng cần chỉ định anticipated image launch frequency. Anticipated image launch frequency được sử dụng để chỉ định số lượng instance EC2 mà bạn muốn khởi chạy trong một giờ.  - Tần suất khởi chạy có thể được chọn từ tần suất xác định trước, chẳng hạn như low – 5 launches per hour hoặc cũng có thể được xác định dưới dạng custom value, chẳng hạn như 50 launches per hour. (Giới hạn lý thuyết cho tham số là 200.000, nhưng đối với tất cả các mục đích thực tế, lời khuyên là không nên thử tham số này).</li>
+<li>Pre-provisioned snapshots được cấp phép trước, chúng được sử dụng để làm giảm thời gian khởi chạy EC2 Windows Instance khi được tối ưu hóa sử dụng Windows AMIs. Amazon EC2 khởi chạy một instance sử dụng Windows AMIs để tạo pre-provisioned snapshots được cấp phép trước. Nó hoàn thành các bước như Sysprep specialize, Windows Out of Box Experience (OOBE) và khởi động lại theo yêu cầu. Cuối cùng, nó dừng instance và tạo snapshot, sau đó được sử dụng cho các lần khởi chạy tiếp theo, làm cho các lần khởi chạy nhanh hơn.</li>
+<li>Dựa trên cấu hình tần suất khởi chạy, các snapshot dự trữ sẽ tự động bổ sung khi được sử dụng hết. Bạn có thể tăng tần suất khởi chạy trước để giải quyết nhu cầu về số lượng instance tăng đột biến để xử lý bất kỳ sự kiện đặc biệt nào. Tần số khởi chạy có thể được đặt lại khi các yêu cầu trở lại bình thường.</li>
+</ul>
+<p>1.6 KHỞI ĐỘNG TÍNH NĂNG</p>
+<p>Vui lòng xem lại phần chuẩn bị trước khi bật tính năng này và vui lòng lưu ý rằng Windows AMIs phải được tạo bằng Sysprep với tùy chọn tắt máy để chọn tính năng khởi chạy nhanh hơn này trên AMIs.</p>
+<ul>
+<li>
+<p>Đối với các phác thảo demo trong bài đăng blog này, có hai Windows custom AMIs được tạo bằng cách sử dụng các instance Sysprep Windows EC2 (xem Hình 1).<br>
+Hình 1. EC2 Instances</p>
+</li>
+<li>
+<p>Một AMIs bao gồm Microsoft Active Directory được cấu hình sẵn, trong khi AMIs kia bao gồm Microsoft SQL Server được cấu hình trước (xem Hình 2)</p>
+</li>
+</ul>
+<p>Hình 2. Custom AMIs</p>
+<ul>
+<li>Cả hai đều được cấu hình bằng ổ đĩa gốc mặc định.</li>
+</ul>
+<p>Để sử dụng các AMIs này, các phần sau mô tả cách bật tính năng khởi chạy nhanh hơn của Windows bằng AWS Management Console and CLI.</p>
+<ol start="2">
+<li>SỬ DỤNG AWS MANAGEMENT CONSOLE</li>
+</ol>
+<p>Làm theo các bước sau để bật tính năng khởi chạy Windows nhanh hơn này trong AWS Management Console.</p>
+<p>Mở bảng điều khiển Amazon EC2 tại EC2 Dashboard. Trong khung điều hướng, bên dưới Image, chọn AMIs (xem Hình 3).</p>
+<p>Hình 3. EC2 Console AMI Menu Option</p>
+<p>Chọn AMIs mà bạn muốn bật tính năng (xem Hình 4).</p>
+<p>Hình 4. Select the Custom AMI</p>
+<p>Từ menu Actions, chọn Manage image optimization (xem Hình 5). Thao tác này sẽ mở ra trang Manage image optimizations , nơi bạn có thể định cấu hình cài đặt để khởi chạy nhanh hơn.</p>
+<p>Hình 5. Image Optimization Option</p>
+<p>Chọn Enable Windows faster launching.(xem Hình 6).</p>
+<p>Hình 6. Windows Faster Launching Configuration</p>
+<p>Từ danh sách thả xuống Set anticipated launch frequency, hãy chọn một giá trị để chỉ định số lượng snapshot sẽ được tạo và duy trì để bao gồm khối lượng khởi chạy instance dự kiến của bạn. Đối với phần demo này , tôi đã chọn Low-5 launches per hour (xem Hình 7).</p>
+<p>Hình 7. Image Launch Frequency Configuration</p>
+<p>Chọn nút Save Changes để bật tính năng này khi bạn hoàn tất cấu hình.
+Khi bạn kích hoạt tính năng này, một số cấu hình và tự động hóa sẽ xảy ra ngầm mà bạn cần biết.
+Một số instance EC2 được khởi chạy theo cấu hình tần số khởi chạy. Các instance EC2 này được sử dụng để tạo snapshot cho việc khởi chạy nhanh. Các instance EC2 này tự động kết thúc khi các snapshot được tạo và sẵn sàng (xem Hình 8).</p>
+<p>Hình 8. EC2 Instances Launched for Snapshots</p>
+<p>Launch Template mặc định được tạo trong các Launch Template, được kiểm soát theo instance. Launch Templates chỉ định loại instance sẽ được khởi chạy.</p>
+<p>Hình 9. Launch Template</p>
+<p>Một IAM role liên kết dịch vụ AWS Service RoleForEC2FastLaunch được tạo (xem Hình 10.). Tham khảo IAM role liên kết dịch vụ để tìm hiểu thêm.</p>
+<p>Hình 10. Service Linked Role</p>
+<p>Trong Snapshots, bạn có thể xem các snapshot đã được tạo cho các images  (xem Hình 11). Những snapshot này được sử dụng cho các lần khởi chạy tiếp theo.</p>
+<p>Hình 11. The Snapshots</p>
+<ol start="3">
+<li>KHÁM PHÁ TÍNH NĂNG THÔNG QUA AWS MANAGEMENT CONSOLE</li>
+</ol>
+<p>Bỏ chọn hộp kiểm Enable Windows faster launching  để dừng khởi chạy nhanh hơn đối với các instance Windows EC2 và để loại bỏ các snapshot được khởi tạo  trước (xem Hình 6). Sau đó, AMI sẽ sử dụng quy trình khởi chạy tiêu chuẩn cho từng instance về sau.</p>
+<p>Vui lòng tham khảo tài liệu Windows Fast Launch Config để biết thêm thông tin và tùy chọn.
+Trong phần này, chúng tôi đã trình bày các bước để định cấu hình tính năng khởi chạy nhanh hơn của Windows bằng Bảng điều khiển quản lý AWS. Trong phần tiếp theo, chúng tôi sẽ định cấu hình tính năng bằng AWS CLI.</p>
+<p>3.1 SỬ DỤNG AWS CLI</p>
+<p>Sau đây là các bước để bật tính năng khởi chạy Windows nhanh hơn bằng AWS CLI. Hãy đảm bảo thực hiện sysprep instance Windows EC2 trước khi bật tính năng này.</p>
+<p>Lưu ý: Hãy đảm bảo rằng bạn đang chạy instance CLI mới nhất (at least 2.4.15) để lệnh bật-khởi chạy nhanh hiển thị. Bạn cũng có thể sử dụng CloudShell từ bảng điều khiển để làm điều tương tự.
+Chạy lệnh AWS CLI sau để bật tính năng khởi chạy nhanh hơn của Windows cho AMI. Trong ví dụ này, ID của AMI là ami-07d3ee0bb1b8e8614 (xem Hình 12)</p>
+<p>PowerShell</p>
+<p>aws  ec2 enable-fast-launch<br>
+&ndash;image-id  ami-07d3ee0bb1b8e8614 
+&ndash;snapshot-configuration TargetResourceCount=10
+&ndash;resource-type snapshot</p>
+<p>Hình 12. AWS CLI for Faster Launch</p>
+<p>Vui lòng tham khảo tài liệu  Enable-fast-launch và Disable-fast-launch để biết thêm chi tiết.</p>
+<ol start="4">
+<li>DỰ KIẾN CHI PHÍ DỊCH VỤ</li>
+</ol>
+<ul>
+<li>
+<p>Không có phí dịch vụ bổ sung khi sử dụng chức năng khởi chạy nhanh hơn. Chỉ các tài nguyên AWS cơ bản đang chạy trong Tài khoản khách hàng như một phần của dịch vụ mới được tính vào chi phí sử dụng.</p>
+</li>
+<li>
+<p>Để minh họa, chúng ta hãy xem xét kịch bản cho phép khởi chạy nhanh hơn với cài đặt tần suất mặc định là 5 lần khởi chạy mỗi giờ. Dịch vụ khởi chạy trước 5 instance T trong nền, sử dụng  Windows Server OS thông qua các giai đoạn Sysprep trong quá trình khởi động. Bước này mất khoảng 15 phút (điều này thay đổi tùy thuộc vào mức độ quá tải của vùng / khu vực và AMI lớn như thế nào).</p>
+</li>
+<li>
+<p>Thời gian chạy của mỗi instance T và volume EBS đính kèm được tính vào chi phí sử dụng. Tiếp theo, dịch vụ  snapshot sẽ tương ứng với từng instance và lưu trữ chúng. Việc lưu trữ 5 snapshot image trong S3 được lập hóa đơn. Mỗi snapshot image sẽ được sử dụng hết khi một instance được khởi chạy nhanh từ AMI. Vì vậy, chi phí lưu trữ S3 phụ thuộc vào thời lượng lưu trữ snapshot trước khi được sử dụng để khởi chạy nhanh từ AMI.</p>
+</li>
+<li>
+<p>Thông thường, chúng ta thấy rằng một snapshot image tồn tại trong khoảng 4-8 giờ trước khi được sử dụng. Khi tất cả 5 snapshot image được sử dụng, dịch vụ sẽ tự động bổ sung chúng trong nền bằng cách chạy các instance T và tiến hành tạo các snapshots . Nếu dịch vụ được sử dụng trong cả tháng, tổng chi phí cho mỗi AMI sẽ vào khoảng $ 5,00 - $ 6,00 mỗi tháng cho AMI dung lượng 50 GB với cài đặt mặc định là 5 lần khởi chạy mỗi giờ. Các tính toán chi phí được cung cấp ở đây chỉ là ước tính và chi phí thực tế có thể thay đổi dựa trên việc sử dụng và các yếu tố khác.</p>
+</li>
+</ul>
+<ol start="5">
+<li>KẾT LUẬN</li>
+</ol>
+<p>Trong bài đăng này, chúng tôi đã đề cập đến cách khách hàng có thể thiết lập những image cần thiết, nhạy cảm với thời gian - chẳng hạn như những image được sử dụng để mở rộng quy mô, khôi phục thảm họa hoặc chuyển hệ thống sang hệ thống chờ ( fail-over ) - để sẵn sàng khởi chạy nhanh với cấu hình tính năng đơn giản. Cấu hình được bật trong phần Quản lý AMI của Bảng điều khiển Amazon EC2 thông qua lệnh API / CLI hoặc trong Image Builder. Tìm hiểu thêm từ thông báo What’s New  và documentation  để khởi chạy các instance Windows nhanh hơn.</p>
+<p>AWS có thể giúp bạn đánh giá cách công ty của bạn có thể tận dụng tối đa các giá trị mà nền tảng điện toán đám mây mang lại. Tham gia cùng hàng triệu khách hàng AWS tin tưởng chúng tôi để di chuyển và hiện đại hóa các ứng dụng quan trọng nhất của họ trên đám mây. Để tìm hiểu thêm về cách hiện đại hóa Windows Server hoặc SQL Server, hãy truy cập  Windows on AWS. Liên hệ với chúng tôi để bắt đầu hành trình di chuyển của bạn ngay hôm nay.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.1-blog-1/" title="Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.3-blog-3/" title="Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1655199306"></script>
+    <script src="/js/perfect-scrollbar.min.js?1655199306"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1655199306"></script>
+    <script src="/js/jquery.sticky.js?1655199306"></script>
+    <script src="/js/featherlight.min.js?1655199306"></script>
+    <script src="/js/highlight.pack.js?1655199306"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1655199306"></script>
+    <script src="/js/learn.js?1655199306"></script>
+    <script src="/js/hugo-learn.js?1655199306"></script>
+
+    <link href="/mermaid/mermaid.css?1655199306" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1655199306"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

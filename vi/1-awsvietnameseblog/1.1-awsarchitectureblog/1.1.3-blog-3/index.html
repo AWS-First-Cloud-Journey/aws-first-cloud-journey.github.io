@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.99.1" />
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF :: THIẾT LẬP VPC PEERING</title>
+
+    
+    <link href="/css/nucleus.css?1655199306" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1655199306" rel="stylesheet">
+    <link href="/css/hybrid.css?1655199306" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1655199306" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1655199306" rel="stylesheet">
+    <link href="/css/auto-complete.css?1655199306" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1655199306" rel="stylesheet">
+    <link href="/css/theme.css?1655199306" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1655199306" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1655199306" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1655199306"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.3-blog-3/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1655199306"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1655199306"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1655199306"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/" title="1-AWSVietnameseBlogs" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/">
+          1-AWSVietnameseBlogs
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/" title="AWS Architecture Blog" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/">
+           <b> 1. </b> AWS Architecture Blog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.1-blog-1/" title="Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.1-blog-1/">
+          Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.2-blog-2/" title="Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.2-blog-2/">
+          Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.3-blog-3/" title="Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.3-blog-3/">
+          Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsvietnameseblog/1.2-windowsonaws/" title="Windows on AWS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsvietnameseblog/1.2-windowsonaws/">
+           <b> 2. </b> Windows on AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.3-blog-3/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.3-blog-3/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=8002351&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>14-06-2022</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+            <i> <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng </a> <br>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>AWS Vietnamese Blog</a> > <a href='/vi/1-awsvietnameseblog/'>1-AWSVietnameseBlogs</a> > <a href='/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/'>AWS Architecture Blog</a> > Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF
+            </h1>
+          
+
+        
+
+
+
+	<h4 id="dream11-ngặn-chặn-các-cuộc-tấn-công-qui-mô-lớn-ở-lớp-ứng-dụng-bằng-aws-waf">Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF</h4>
+<p>Là nền tảng fantasy sports lớn nhất thế giới với hơn 120 triệu người dùng, Dream11 chạy đồng thời nhiều contests trong khi xử lý hàng triệu yêu cầu của người dùng mỗi phút. Dream11 lấy người dùng làm chính và dữ liệu quan trọng của họ làm ưu tiên nhằm đảm bảo rằng ứng dụng Dream11 sẽ luôn bảo vệ người dùng trước tất cả các mối đe dọa và lỗ hổng bảo mật.</p>
+<ol>
+<li>Giới thiệu về AWS WAF Security Automations</li>
+</ol>
+<p>AWS WAF là một web application firewall giúp bảo vệ các ứng dụng và APIs khỏi các web exploits và bots phổ biến. Các cuộc tấn công này có thể ảnh hưởng đến tính khả dụng, xâm phạm bảo mật hoặc tiêu tốn quá nhiều tài nguyên của người dùng. AWS WAF cung cấp cho bạn quyền kiểm soát cách lưu lượng truy cập vào các ứng dụng của bạn. Bạn có thể tạo security rules nhằm kiểm soát lưu lượng truy cập của bot và chặn các mẫu tấn công phổ biến, chẳng hạn như SQL injection hoặc cross-site scripting (XSS).</p>
+<p>AWS WAF Security Automation sử dụng AWS CloudFormation để cấu hình nhanh các quy tắc AWS WAF giúp chặn các loại tấn công phổ biến sau:</p>
+<p>SQL injection
+Cross-site scripting
+HTTP floods
+Scanners and probes
+Known attacker origins (IP reputation lists)
+Bots and scrapers
+Trong bài đăng trên blog này, chúng tôi sẽ giải thích cách Dream11 sử dụng AWS WAF Security Automations để bảo vệ ứng dụng của bạn khỏi các cuộc tấn công từ scanners và probes attacks.</p>
+<ol start="2">
+<li>Scanner và probe automation</li>
+</ol>
+<p>Để hiểu về scanner và  probe automation, các bạn có thể xem một kịch bản tấn công thực tế đối với một ứng dụng cơ bản được AWS WAF bảo vệ. Giả sử rằng một kể tấn công đang cố gắng quét ứng dụng và xác định sơ hở bằng cách sử dụng công cụ tuỳ chỉnh của họ. Họ dự định tiến hành các cuộc tấn công injection (chẳng hạn như SQLi, XSS) hoặc các cuộc tấn công directory brute force.</p>
+<p>Ứng dụng lúc này được bảo mật bởi AWS WAF, có các quy tắc để chặn các yêu cầu nếu phát hiện các signatures và patterns phù hợp. AWS WAF không có tất cả các payload để chặn tất cả các kiểu tấn công. Điều này có nghĩa là sau một số lần thử và gặp lỗi, kẻ tấn công có thể tìm thấy phần payload không bị AWS WAF chặn và cố gắng khai thác lỗ hổng.</p>
+<p>Trong trường hợp này, điều gì sẽ xảy ra nếu AWS WAF có thể phát hiện hành vi của các IP vi phạm và chặn nó trong một khoảng thời gian nhất định? Sẽ thật tuyệt nếu AWS WAF chặn IP của một kẻ tấn công sau khi nhận được một vài yêu cầu độc hại phải không? Bằng cách đó, các yêu cầu mới đến từ IP đó sẽ bị chặn mà AWS WAF không cần phải kiểm tra tất cả các quy tắc trong web ACL. Với mọi nỗ lực vượt qua thành công thì IP vi phạm cũng sẽ bị chặn ngay lập tức. Thay vì chặn IP vĩnh viễn, tính năng này chặn IP vi phạm trong một khoảng thời gian nhất định, không cho kẻ tấn công thực hiện thêm bất kỳ lần thử nào. Nó hoạt động như một bước đầu tiên của phản ứng khi xảy ra sự cố bảo mật. Đây là lúcitự động hóa sẽ giúp ích cho bạn.</p>
+<p>Tính năng Scanner và probe automation giúp theo dõi Amazon CloudFront logs và phân tích mã trạng thái HTTP cho các yêu cầu đến từ các IP khác nhau. Dựa trên ngưỡng được cấu hình của HTTP status codes, scanner và probe automation sẽ cập nhật trực tiếp IP độc hại vào AWS WAF rule IPSet. Sau đó, nó sẽ chặn các yêu cầu tiếp theo từ IP đó trong một khoảng thời gian đã được định cấu hình.</p>
+<p>Giải pháp AWS WAF Security Automations tạo ra một AWS WAF rule, một AWS Lambda function và một truy vấn Scanner và Probes trên Amazon Athena. Câu truy vấn Athena sẽ phân tích vào Amazon CloudFront logs hoặc Application Load Balancer theo các khoảng thời gian đều đặn. Cứ mỗi phút, nó sẽ đếm số lượng yêu cầu bất thường từ các địa chỉ IP nguồn. Lambda function sẽ tiến hành cập nhật quy tắc AWS WAF IPSet để chặn thao tác scan từ các địa chỉ IP có tỷ lệ lỗi cao.</p>
+<p>Scanner và probe solution</p>
+<p>Hình 1. Kiến trúc giải pháp  scanner and probe automation (xxx thể hiện số liệu được định nghĩa theo từng trường hợp sử dụng )</p>
+<p>Quy trình làm việc của giải pháp như sau, thể hiện trong Hình 1:</p>
+<p>Các CloudFront logs được đẩy vào Amazon S3 bucket.
+Log Parser Lambda sẽ chạy truy vấn Athena để tìm ngưỡng mã lỗi cho từng địa chỉ IP duy nhất.
+Nếu ngưỡng lỗi HTTP bị vượt qua đối với bất kỳ IP nào, thì Lambda function sẽ cập nhật IP vào trong AWS WAF IPSet trong một thời gian nhất định.
+IPSet tự động được bỏ chặn sau khi khoảng thời gian kết thúc.</p>
+<ol start="3">
+<li>Tùy chỉnh giải pháp AWS WAF Security Automation</li>
+</ol>
+<p>Scanner và probe automation với các quy tắc sẽ block traffic nếu tỷ lệ lỗi cho một địa chỉ IP cụ thể vượt qua ngưỡng. Sau đó, nó thêm IP vào IPSet bị chặn. IP này bị chặn trong một khoảng thời gian và chúng ta có thể tuỳ chỉnh cấu hình cho chúng (ví dụ: 12 giờ, 2 ngày, 1 tuần).</p>
+<p>Trong quá trình thiết lập AWS WAF cho Dream11, có những trường hợp yêu cầu ngoại lệ đối với quy tắc trước đó. Một là để ngăn chặn các internal services, hai là gateway IPs khỏi bị chặn bởi security automation. Chúng ta cần tùy chỉnh các quy tắc cho các ngưỡng được xác định trước này. Ví dụ: Solution nên chặn lưu lượng truy cập bên ngoài, nhưng exclude bất kỳ internal IP addresses nào.</p>
+<p>Nhóm bảo mật Dream11 đã tùy chỉnh logic Lambda nhằm để phê duyệt tất cả các địa chỉ IPs của  internal NAT gateway. Scanner and probe automation bỏ qua các IP này ngay cả khi có nhiều lỗi từ các IP đã được phê duyệt. Mã mẫu như sau:</p>
+<p>log.info(&quot;[update_ip_set] \tIgnore the approved IP &ldquo;)
+if ip_type == &ldquo;IPV4&rdquo; and source_ip not in outstanding_requesters[&lsquo;ApprovedIPs&rsquo;]:<br>
+addresses_v4.append(source_ip)
+elif ip_type == &ldquo;IPV6&rdquo; and source_ip not in outstanding_requesters[&lsquo;ApprovedIPs&rsquo;]:                 	addresses_v6.append(source_ip)
+Lưu ý: Tạo tệp JSON với danh sách các IP được chấp thuận và lưu trữ trong APP_ACCESS_LOG_BUCKET
+Chúng tôi sẽ sử dụng cùng một S3 bucket để đặt các IP được phê duyệt dưới dạng tệp xyz.json, nơi chúng ta lưu trữ log truy cập CloudFront của mình. Điều này có thể định cấu hình trong file CloudFormation template dành cho Security Automation.</p>
+<p>Giải thích mã:
+Trước tiên, custom code xác thực IP cụ thể mà ngưỡng lỗi được vượt quá , ngoại trừ các IP đã được phê duyệt.
+Nếu IP thuộc định dạng IPV4 hoặc IPV6 và không phải là IP được phê duyệt, thì IP đó sẽ được thêm vào IPSet bị chặn trong một khoảng thời gian nhất định.</p>
+<p>Việc tùy chỉnh Lambda function sẽ cung cấp các giải pháp security automation mà điều đó sẽ không chặn bất kỳ request hợp lệ nào. Đồng thời, nó cung cấp khả năng bảo vệ chống lại  các cuộc tấn công dạng scanner and probe.  AWS WAF security automation là một giải pháp mã nguồn mở và được lưu trữ trên GitHub.</p>
+<p>4.Kết luận</p>
+<p>Trong bài đăng trên blog này, chúng tôi đã đưa ra một cái nhìn tổng quan ngắn gọn về cách bạn có thể giảm thiểu các cuộc tấn công bằng cách sử dụng AWS WAF security automation chống lại scanner and probe attacks. Chúng tôi cũng đã minh họa sự tùy chỉnh được thực hiện bởi nhóm bảo mật Dream11.</p>
+<p>Bằng cách tự động hóa các hoạt động bảo mật của mình, bạn sẽ cải thiện khả năng ứng phó sự cố hiệu quả. Bạn có thể sắp xếp thứ tự ưu tiên cho các mối đe dọa và xử lý các cuộc tấn công mạng một cách tự động với các hành động tự động. Điều này làm giảm nhu cầu can thiệp, giảm thời gian của bạn và nó có thể giải quyết các vấn đề bảo mật mà không cần các bạn ngồi làm thủ công.</p>
+<p>Sau khi triển khai điều này tại Dream11, chúng ta đã có thể tạo các tuỳ chỉnh dành riêng cho ứng dụng cụ thể của mình để chặn các kiểu tấn công. Điều này đã cung cấp tính khả dụng của ứng dụng, bảo mật tài nguyên và ngăn chặn việc tiêu thụ tài nguyên quá mức. Với giải pháp này, chúng tôi có thể cung cấp trải nghiệm fantasy sports tốt nhất cho hơn 120 triệu người dùng.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/1-awsvietnameseblog/1.1-awsarchitectureblog/1.1.2-blog-2/" title="Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/1-awsvietnameseblog/1.2-windowsonaws/" title="Windows on AWS" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1655199306"></script>
+    <script src="/js/perfect-scrollbar.min.js?1655199306"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1655199306"></script>
+    <script src="/js/jquery.sticky.js?1655199306"></script>
+    <script src="/js/featherlight.min.js?1655199306"></script>
+    <script src="/js/highlight.pack.js?1655199306"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1655199306"></script>
+    <script src="/js/learn.js?1655199306"></script>
+    <script src="/js/hugo-learn.js?1655199306"></script>
+
+    <link href="/mermaid/mermaid.css?1655199306" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1655199306"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
