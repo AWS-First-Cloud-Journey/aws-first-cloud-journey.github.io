@@ -9,24 +9,24 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title> :: AWS VietNamese Blog</title>
+    <title>Những điều cần quan tâm khi dịch chuyển Data warehouse lên Amazon Redshift :: AWS VietNamese Blog</title>
 
     
-    <link href="/css/nucleus.css?1655219073" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1655219073" rel="stylesheet">
-    <link href="/css/hybrid.css?1655219073" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1655219073" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1655219073" rel="stylesheet">
-    <link href="/css/auto-complete.css?1655219073" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1655219073" rel="stylesheet">
-    <link href="/css/theme.css?1655219073" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1655219073" rel="stylesheet">
+    <link href="/css/nucleus.css?1655221379" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1655221379" rel="stylesheet">
+    <link href="/css/hybrid.css?1655221379" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1655221379" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1655221379" rel="stylesheet">
+    <link href="/css/auto-complete.css?1655221379" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1655221379" rel="stylesheet">
+    <link href="/css/theme.css?1655221379" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1655221379" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1655219073" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1655221379" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1655219073"></script>
+    <script src="/js/jquery-3.3.1.min.js?1655221379"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1655219073"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1655219073"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1655221379"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1655221379"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1655219073"></script>
+<script type="text/javascript" src="/js/search.js?1655221379"></script>
 
     
   </div>
@@ -367,13 +367,13 @@
  
   
     
-    <li data-nav-id="/vi/4-dataanalytics/4.1-blog-1/" title="" class="dd-item 
+    <li data-nav-id="/vi/4-dataanalytics/4.1-blog-1/" title="Những điều cần quan tâm khi dịch chuyển Data warehouse lên Amazon Redshift" class="dd-item 
         parent
         active
         
         ">
       <a href="/vi/4-dataanalytics/4.1-blog-1/">
-          
+          Những điều cần quan tâm khi dịch chuyển Data warehouse lên Amazon Redshift
           
             <i class="fas fa-check read-icon"></i>
           
@@ -519,7 +519,7 @@
             
           
           
-            <a href='/vi/'>AWS Vietnamese Blog</a> > <a href='/vi/4-dataanalytics/'>Data Analytics on AWS</a> > 
+            <a href='/vi/'>AWS Vietnamese Blog</a> > <a href='/vi/4-dataanalytics/'>Data Analytics on AWS</a> > Những điều cần quan tâm khi dịch chuyển Data warehouse lên Amazon Redshift
           
         
           
@@ -532,7 +532,15 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -548,7 +556,7 @@
           
             <h1>
               
-              
+              Những điều cần quan tâm khi dịch chuyển Data warehouse lên Amazon Redshift
             </h1>
           
 
@@ -556,7 +564,184 @@
 
 
 
-	
+	<h4 id="những-điều-cần-quan-tâm-khi-dịch-chuyển-data-warehouse-lên-amazon-redshift">Những điều cần quan tâm khi dịch chuyển Data warehouse lên Amazon Redshift</h4>
+<p>Khách hàng đang dần chuyển kho dữ liệu (data warehouse) sang Amazon Redshift  vì Amazon Redshift nhanh, có khả năng mở rộng và tiết kiệm chi phí. Tuy nhiên, các dự án  di chuyển data warehouse có thể rất phức tạp và đầy thách thức. Trong bài viết này, tôi giúp bạn hiểu các yếu tố tác động phổ biến của việc dịch chuyển data warehouse, chiến lược  dịch chuyển cũng như những công cụ và dịch vụ nào  sẵn sàng để hỗ trợ dự án của bạn.</p>
+<p>Trước tiên, chúng ta hãy thảo luận về big data landscape, ý nghĩa của  kiến trúc dữ liệu hiện đạivà những điều bạn cần xem xét đối với các dự án  dịch chuyển data warehouse khi xây dựng kiến trúc dữ liệu hiện đại.</p>
+<h4 id="cơ-hội-kinh-doanh">Cơ hội kinh doanh</h4>
+<p>Dữ liệu đang thay đổi cách chúng ta làm việc, sống và vui chơi. Tất cả sự thay đổi hành vi này và sự dịch chuyển lên cloud đã dẫn đến sự bùng nổ dữ liệu trong 20 năm qua. Sự  phát triển của Internet of Things  (IoT) và điện thoại thông minh đã đẩy nhanh lượng dữ liệu được tạo ra mỗi ngày. Các mô hình kinh doanh đã thay đổi, và nhu cầu của những người điều hành các doanh nghiệp này cũng vậy. Chúng ta đã chuyển từ việc nói về hàng terabyte dữ liệu chỉ vài năm trước đây sang hàng petabyte và exabyte dữ liệu. Bằng cách đưa dữ liệu vào hoạt động một cách tối ưu và xây dựng thông tin (insight) chi tiết sâu sắc về kinh doanh từ dữ liệu thu thập được, các doanh nghiệp thuộc các ngành khác nhau và thuộc nhiều quy mô khác nhau có thể đạt được kết quả kinh doanh đa dạng. Các mục tiêu có thể được phân loại  thành các kết quả kinh doanh cốt lõi sau:</p>
+<ul>
+<li>
+<p>Cải thiện độ tối ưu của quá trình vận hành - Bằng cách hiểu rõ dữ liệu được thu thập từ các quy trình hoạt động khác nhau, các doanh nghiệp có thể cải thiện trải nghiệm của khách hàng, tăng hiệu quả sản xuất và tăng khả năng bán hàng và tiếp thị.</p>
+</li>
+<li>
+<p>Đưa ra quyết định sáng suốt hơn - Thông qua việc phát triển những hiểu biết sâu sắc và có ý nghĩa hơn bằng cách tập hợp bức tranh toàn cảnh về dữ liệu trong một tổ chức, các doanh nghiệp có thể đưa ra quyết định sáng suốt hơn</p>
+</li>
+<li>
+<p>Tăng tốc đổi mới - Việc kết hợp các nguồn dữ liệu  nội bộ và bên ngoài cho phép nhiều trường hợp sử dụng trí tuệ nhân tạo (Artificial Intelligence) và Máy học (Machine Learning) giúp các doanh nghiệp tự động hóa các quy trình và mở ra các cơ hội kinh doanh mà trước đây không thể làm được hoặc quá khó thực hiện</p>
+</li>
+</ul>
+<h4 id="thách-thức-trong-doanh-nghiệp">Thách thức trong doanh nghiệp</h4>
+<p>Tăng trưởng dữ liệu theo cấp số nhân cũng đã tạo ra những thách thức lớn trong kinh doanh.</p>
+<p>Trước hết, các doanh nghiệp cần truy cập tất cả dữ liệu trong toàn tổ chức và dữ liệu có thể được phân chia thành các silos. Các dữ liệu đến từ nhiều nguồn khác nhau, trong một loạt các loại dữ liệu với khối lượng và tốc độ lớn. Một số dữ liệu có thể được lưu trữ dưới dạng dữ liệu có cấu trúc trong cơ sở dữ liệu quan hệ. Các dữ liệu khác có thể được lưu trữ dưới dạng dữ liệu bán cấu trúc trong các object stores, chẳng hạn như media files và dữ liệu clickstream data, chúng liên tục được truyền trực tuyến từ các thiết bị di động.</p>
+<p>Thứ hai, để xây dựng thông tin chi tiết từ dữ liệu, doanh nghiệp cần đi sâu vào dữ liệu bằng cách tiến hành phân tích. Các hoạt động phân tích yêu cầu một lượng lớn nhà phân tích dữ liệu, đến hàng chục và hàng trăm người, những người này cần truy cập hệ thống đồng thời với nhau. Để sở hữu một hệ thống hiệu suất có khả năng mở rộng để đáp ứng nhu cầu truy vấn thường là một thách thức lớn. Nó càng trở nên phức tạp hơn khi các doanh nghiệp cần chia sẻ dữ liệu đã phân tích với khách hàng của họ.</p>
+<p>Cuối cùng nhưng không kém phần quan trọng, các doanh nghiệp cần một giải pháp hiệu quả về chi phí để giải quyết vấn đề dữ liệu bị silo, hiệu suất, khả năng mở rộng, bảo mật và tuân thủ. Việc có thể hình dung và dự đoán chi phí là cần thiết đối với một doanh nghiệp để đo lường hiệu quả chi phí của giải pháp của mình.</p>
+<p>Để giải quyết những thách thức này, các doanh nghiệp cần một kiến ​​trúc dữ liệu hiện đại trong tương lai và một hệ thống phân tích mạnh mẽ, hiệu quả.</p>
+<h4 id="kiến-trúc-dữ-liệu-hiện-đại">Kiến trúc dữ liệu hiện đại</h4>
+<p>Modern data architecture (Kiến trúc dữ liệu hiện tại) cho phép các tổ chức lưu trữ bất kỳ lượng dữ liệu nào ở các open formats, hạn chế việc tồn tại các silos về dữ liệu, trao quyền cho người dùng  chạy các thao tác phân tích hoặc Máy học (Machine Learning) bằng cách sử dụng công cụ hoặc kỹ thuật ưa thích của họ và quản lý những người có quyền truy cập vào các phần dữ liệu cụ thể với bảo mật phù hợp và các biện pháp kiểm soát quản trị dữ liệu.</p>
+<p>AWS data lake architecture (Kiến trúc hồ dữ liệu) là một kiến trúc dữ liệu hiện đại cho phép bạn lưu trữ dữ liệu trong data lake và sử dụng một vòng tròn các dịch vụ dữ liệu và chúng được xây dựng có mục đích xung quanh data lake, như được minh họa trong hình sau. Điều này cho phép bạn đưa ra quyết định nhanh chóng trên quy mô lớn và hiệu quả về chi phí. Để biết thêm chi tiết, hãy tham khảo <a href="https://aws.amazon.com/big-data/datalakes-and-analytics/data-lake-house/">Modern Data Architecture on AWS</a>.</p>
+<figure><img src="/images/4-DataAnalytics/4.1-Blog-1/0001.png" width="900pc"/><figcaption>
+            <h4>Kiến trúc dữ liệu hiện đại</h4>
+        </figcaption>
+</figure>
+
+<h4 id="kho-dữ-liệu-hiện-đại">Kho dữ liệu hiện đại</h4>
+<p>Amazon Redshift  là modern data warehouse ( kho dữ liệu hiện đại ) được quản lý hoàn toàn, có thể mở rộng, giúp tăng tốc thời gian tìm hiểu thông tin chi tiết (insights) với khả năng phân tích nhanh chóng, dễ dàng và an toàn trên quy mô lớn. Với Amazon Redshift, bạn có thể phân tích tất cả dữ liệu của mình và nhận được hiệu suất ở bất kỳ quy mô nào với chi phí thấp và có  khả năng dự đoán cao.</p>
+<figure><img src="/images/4-DataAnalytics/4.1-Blog-1/0002.png" width="900pc"/><figcaption>
+            <h4>Kho dữ liệu hiện đại</h4>
+        </figcaption>
+</figure>
+
+<p>Amazon Redshift  đem lại những lợi ích sau:</p>
+<ul>
+<li>
+<p>Phân tích mọi dữ liệu - Với Amazon Redshift, bạn có thể dễ dàng phân tích tất cả dữ liệu của mình trên data warehouse và data lake với các chính sách quản trị và bảo mật nhất quán. Chúng tôi gọi đây là modern data architecture. Với Amazon Redshift Spectrum, bạn có thể truy vấn dữ liệu trong data lake của mình mà không cần đưa dữ liệu vào Redshift cluster hoặc chuẩn bị dữ liệu. Và với tính năng data lake export, bạn có thể lưu kết quả của truy vấn Amazon Redshift trở lại data lake. Điều này có nghĩa là bạn có thể tận dụng các phân tích thời gian thực và các trường hợp sử dụng Machine Learning / Artificial intelligence mà không cần tái kiến ​​trúc, vì Amazon Redshift được tích hợp hoàn toàn với data lake của bạn. Với các tính năng mới như data sharing, bạn có thể dễ dàng chia sẻ dữ liệu trên các Amazon Redshift cluster cả bên trong và bên ngoài, để mọi người có cái nhìn trực tiếp và nhất quán về dữ liệu.  Amazon Redshift ML giúp bạn dễ dàng làm được nhiều việc hơn với dữ liệu của mình — bạn có thể tạo, đào tạo ( train ) và triển khai các mô hình Machine Learning bằng cách sử dụng các lệnh SQL quen thuộc trực tiếp trong Amazon Redshift data warehouses.</p>
+</li>
+<li>
+<p>Hiệu suất nhanh cho mọi quy mô - Amazon Redshift là một hệ thống có khả năng tự điều chỉnh và tự học cho phép bạn đạt được hiệu suất tốt nhất cho khối lượng công việc của mình mà không cần phải điều chỉnh data warehouse của bạn với các tác vụ như xác định sort keys và distribution keys, và các khả năng mới như materialized views, auto-refresh, and auto-query rewrite. Amazon Redshift mở rộng quy mô để cung cấp kết quả nhanh chóng nhất quán từ gigabyte đến petabyte dữ liệu và từ một vài người dùng đến hàng nghìn người. Khi cơ sở người dùng của bạn mở rộng đến hàng nghìn người dùng đồng thời, khả năng mở rộng concurrency scaling sẽ tự động triển khai các tài nguyên tính toán cần thiết để quản lý tải bổ sung. Amazon Redshift RA3 instances với  tài nguyên tính toán và lưu trữ riêng biệt được quản lý bởi AWS, vì vậy bạn có thể mở rộng quy mô một cách độc lập và chỉ trả tiền cho vùng lưu trữ bạn cần.  AQUA (Advanced Query Accelerator) for Amazon Redshift là một bộ đệm phân tán mới và giúp tăng tốc phần cứng, tự động tăng hiệu năng cho một số loại truy vấn nhất định.</p>
+</li>
+<li>
+<p>Phân tích dễ dàng cho mọi người - Amazon Redshift là một kho dữ liệu được quản lý hoàn toàn giúp loại bỏ gánh nặng quản lý cơ sở hạ tầng và tối ưu hóa hiệu suất. Bạn có thể tập trung vào việc tìm hiểu insight, thay vì thực hiện các tác vụ bảo trì như cung cấp cơ sở hạ tầng, tạo bản sao lưu, thiết lập bố cục dữ liệu và các tác vụ khác. Bạn có thể vận hành dữ liệu ở các định dạng mở, sử dụng các lệnh SQL quen thuộc và tận dụng trực quan hóa truy vấn có sẵn thông qua Query Editor v2 mới. Bạn cũng có thể truy cập dữ liệu từ bất kỳ ứng dụng nào thông qua API dữ liệu an toàn mà không cần cấu hình trình điều khiển phần mềm, quản lý kết nối cơ sở dữ liệu. Amazon Redshift tương thích với các công cụ business intelligence (BI), mở ra sức mạnh và khả năng tích hợp của Amazon Redshift cho người dùng doanh nghiệp hoạt động từ bên trong công cụ BI.</p>
+</li>
+</ul>
+<p>Kiến trúc dữ liệu hiện đại , kiến trúc data lake và kho dữ liệu hiện đại với Amazon Redshift giúp các doanh nghiệp ở mọi quy mô khác nhau giải quyết những thách thức về dữ liệu lớn, hiểu được lượng lớn dữ liệu và thúc đẩy kết quả kinh doanh. Bạn hãy bắt đầu hành trình xây dựng kiến trúc dữ liệu hiện đại bằng cách di chuyển kho dữ liệu của mình sang Amazon Redshift.</p>
+<h4 id="các-vấn-đề-cần-quan-tâm-khi-dịch-chuyển">Các vấn đề cần quan tâm khi dịch chuyển</h4>
+<p>Bạn có thể chọn một trong số ba chiến lược dịch chuyển sau: one-step migration, two-step migration, hoặc wave-based migration.</p>
+<p>One-step migration là một lựa chọn tốt cho các cơ sở dữ liệu không yêu cầu hoạt động liên tục, chẳng hạn như sao chép liên tục để giữ cho các thay đổi dữ liệu đang diễn ra đồng bộ giữa nguồn và đích. Bạn có thể trích xuất cơ sở dữ liệu hiện có dưới dạng file Comma Separated Value (CSV) hoặc columnar format như Parquet, sau đó sử dụng các dịch vụ AWS Snow Family chẳng hạn như  AWS Snowball để cung cấp bộ dữ liệu tới Amazon Simple Storage Service (Amazon S3) để tải vào Amazon Redshift. Sau đó, bạn có thể kiểm tra cơ sở dữ liệu đích đến Amazon Redshift có nhất quán với dữ liệu nguồn hay không. Sau khi tất cả các xác thực đã được thông qua, cơ sở dữ liệu được chuyển sang AWS.</p>
+<p>Two-step migrations thường được sử dụng cho cơ sở dữ liệu ở bất kỳ kích thước nào với yêu cầu hoạt động liên tục, chẳng hạn như sao chép liên tục. Trong quá trình dịch chuyển, cơ sở dữ liệu nguồn có các thay đổi dữ liệu liên tục và việc sao chép liên tục giúp các thay đổi dữ liệu được đồng bộ hóa giữa nguồn và Amazon Redshift. Bản phân tích của chiến lược di chuyển hai bước như sau:</p>
+<ul>
+<li>
+<p>Di chuyển dữ liệu ban đầu - Dữ liệu được trích xuất từ cơ sở dữ liệu nguồn, tốt nhất là nên sử dụng trong khoản thời gian không phải là giờ cao điểm để giảm thiểu tác động. Sau đó, dữ liệu được di chuyển sang Amazon Redshift bằng cách thực hiện theo phương pháp one-step migration được mô tả trước đây.</p>
+</li>
+<li>
+<p>Di chuyển dữ liệu đã thay đổi - Dữ liệu đã thay đổi trong cơ sở dữ liệu nguồn sau khi di chuyển dữ liệu ban đầu được truyền đến đích trước khi chuyển đổi. Bước này đồng bộ hóa cơ sở dữ liệu nguồn và cơ sở dữ liệu đích. Sau khi tất cả dữ liệu đã thay đổi được di chuyển, bạn có thể xác thực dữ liệu trong cơ sở dữ liệu đích và thực hiện các kiểm tra cần thiết. Nếu tất cả các bài kiểm tra đều vượt qua, thì bạn chuyển sang kho dữ liệu Amazon Redshift.</p>
+</li>
+</ul>
+<p>Wave-based migration phù hợp với các dự án di chuyển kho dữ liệu quy mô lớn. Nguyên tắc của wave-based migration là thực hiện các biện pháp phòng ngừa để chia một dự án phức tạp thành nhiều wave hợp lý và có hệ thống. Chiến lược này có thể làm giảm đáng kể sự phức tạp và rủi ro. Bạn bắt đầu từ một workload bao gồm nhiều nguồn dữ liệu và lĩnh vực chủ đề có độ phức tạp trung bình, sau đó thêm nhiều nguồn dữ liệu và lĩnh vực chủ đề hơn trong mỗi wave tiếp theo. Với chiến lược này, bạn chạy song song cả kho dữ liệu nguồn và môi trường Amazon Redshift Production trong một khoảng thời gian nhất định trước khi có thể ngừng hoạt động hoàn toàn kho dữ liệu nguồn. Xem phần Develop an application migration methodology to modernize your data warehouse with Amazon Redshift để biết chi tiết về cách xác định và nhóm các nguồn dữ liệu cũng như các ứng dụng phân tích để di chuyển từ kho dữ liệu nguồn sang Amazon Redshift bằng cách sử dụng phương pháp Wave-based migration.</p>
+<p>Để quyết định chiến lược migration của bạn, hãy tham khảo bảng sau để lập bản đồ các yếu tố cần cân nhắc với chiến lược migration ưu tiên.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>One-Step Migration</th>
+<th>Two-Step Migration</th>
+<th>Wave-Based Migration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Số lượng các lĩnh vực trong phạm vi của project dịch chuyển dữ liệu</td>
+<td>Nhỏ</td>
+<td>Vừa tới Lớn</td>
+<td>Vừa tới lớn</td>
+</tr>
+<tr>
+<td>Dung lượng dữ liệu cần dịch chuyển</td>
+<td>Nhỏ tới Lớn</td>
+<td>Nhỏ tới Lớn</td>
+<td>Nhỏ tới Lớn</td>
+</tr>
+<tr>
+<td>Tần suất dữ liệu thay đổi trong quá trình dịch chuyển</td>
+<td>Không thay đổi</td>
+<td>Ít tới Thường xuyên</td>
+<td>Ít tới Thường xuyên</td>
+</tr>
+<tr>
+<td>Tính phức tạp của việc chuyển đổi dữ liệu</td>
+<td>Bất kỳ</td>
+<td>Bất kỳ</td>
+<td>Bất kỳ</td>
+</tr>
+<tr>
+<td>Thời gian thực hiện chuyển đổi từ nguồn sang đích</td>
+<td>Vài giờ</td>
+<td>Vài giây</td>
+<td>Vài giây</td>
+</tr>
+<tr>
+<td>Thời gian cho dự án dịch chuyển</td>
+<td>Vài tuần</td>
+<td>Vài tuần tới vài tháng</td>
+<td>Vài tháng</td>
+</tr>
+</tbody>
+</table>
+<h4 id="quá-trình-di-chuyển">Quá trình di chuyển</h4>
+<p>Trong phần này, chúng tôi xem xét các bước tổng quan của quá trình dịch chuyển. Chiến lược two-step migration và chiến lược wave-based migration bao gồm cả ba bước migration. Tuy nhiên, chiến lược wave-based migration bao gồm một số lần lặp lại. Những cơ sở dữ liệu không yêu cầu hoạt động liên tục mới phù hợp cho quá trình one-step migration, chỉ cần có Bước 1 và 2 trong quy trình  migration.</p>
+<h4 id="bước-1-chuyển-đổi-schema-theo-từng-lĩnh-vực">Bước 1: Chuyển đổi schema theo từng lĩnh vực</h4>
+<p>Trong bước này, bạn hãy làm cho source data warehouse schema  nguồn tương thích với Amazon Redshift schema bằng cách chuyển đổi source data warehouse schema, để làm được điều đó, bạn sử dụng các schema conversion tools như  AWS Schema Conversion Tool (AWS SCT) và các công cụ khác từ các đối tác của AWS. Trong một số tình huống, bạn cũng có thể được yêu cầu sử dụng mã tùy chỉnh để thực hiện các chuyển đổi schema phức tạp. Chúng ta tìm hiểu sâu hơn về AWS SCT và các phương pháp di chuyển tốt nhất trong phần sau.</p>
+<figure><img src="/images/4-DataAnalytics/4.1-Blog-1/0003.png" width="900pc"/><figcaption>
+            <h4>Chuyển đổi schema theo từng lĩnh vực</h4>
+        </figcaption>
+</figure>
+
+<h4 id="bước-2-trích-xuất-dữ-liệu-ban-đầu-và-load-vào-amazon-redshift">Bước 2: Trích xuất dữ liệu ban đầu và load vào Amazon Redshift</h4>
+<p>Trong bước này, bạn sẽ hoàn thành việc trích xuất dữ liệu ban đầu và load dữ liệu nguồn vào Amazon Redshift lần đầu tiên. Bạn có thể sử dụng  AWS SCT data extractors để trích xuất dữ liệu từ source data warehouse và load dữ liệu lên Amazon S3 nếu kích thước dữ liệu và yêu cầu truyền dữ liệu của bạn cho phép bạn truyền dữ liệu qua mạng được kết nối. Ngoài ra, nếu có các giới hạn như giới hạn dung lượng mạng, bạn có thể load dữ liệu vào Snowball và từ đó dữ liệu được load lên Amazon S3. Khi dữ liệu trong kho dữ liệu nguồn có sẵn trên Amazon S3, dữ liệu đó sẽ được load vào Amazon Redshift. Trong các tình huống khi công cụ gốc của source data warehouse thực hiện công việc trích xuất và load dữ liệu tốt hơn so với trình trích xuất dữ liệu AWS SCT, bạn có thể chọn sử dụng các công cụ gốc để hoàn thành bước này.</p>
+<figure><img src="/images/4-DataAnalytics/4.1-Blog-1/0004.png" width="900pc"/><figcaption>
+            <h4>Trích xuất dữ liệu ban đầu và load vào Amazon Redshift</h4>
+        </figcaption>
+</figure>
+
+<h4 id="bước-3-delta-và--incremental-load">Bước 3: Delta và  incremental load</h4>
+<p>Trong bước này, bạn sử dụng AWS SCT và đôi khi là các công cụ gốc dành riêng cho source data warehouse để nắm bắt và load các thay đổi delta hoặc incremental từ các nguồn vào Amazon Redshift. Điều này thường được gọi là change data capture (CDC). CDC là một quá trình ghi lại những thay đổi được thực hiện trong cơ sở dữ liệu và đảm bảo rằng những thay đổi đó được sao chép tới một đích như data warehouse.</p>
+<figure><img src="/images/4-DataAnalytics/4.1-Blog-1/0005.png" width="900pc"/><figcaption>
+            <h4>Delta và  incremental load</h4>
+        </figcaption>
+</figure>
+
+<p>Bây giờ bạn sẽ có đủ thông tin để bắt đầu phát triển kế hoạch dịch chuyển cho data warehouse của mình. Trong phần sau, tôi đi sâu hơn vào các dịch vụ AWS có thể giúp bạn di chuyển data warehouse của mình sang Amazon Redshift và các phương pháp hay nhất khi sử dụng các dịch vụ này để đẩy nhanh quá trình triển khai dự án dịch chuyển data warehouse của bạn.</p>
+<h4 id="dịch-vụ-hỗ-trợ-dịch-chuyển-kho-dữ-liệu">Dịch vụ hỗ trợ dịch chuyển kho dữ liệu</h4>
+<p>Di chuyển kho dữ liệu bao gồm một tập hợp các dịch vụ và công cụ để hỗ trợ quá trình di chuyển. Bạn bắt đầu với việc tạo báo cáo đánh giá dịch chuyển cơ sở dữ liệu và sau đó chuyển đổi schema nguồn để tương thích với Amazon Redshift bằng cách sử dụng AWS SCT. Để di chuyển dữ liệu, bạn có thể sử dụng công cụ trích xuất dữ liệu AWS SCT, công cụ này có tích hợp với  AWS Data Migration Service (AWS DMS) để tạo và quản lý các tác vụ AWS DMS cũng như sắp xếp việc dịch chuyển dữ liệu.</p>
+<p>Để chuyển dữ liệu nguồn qua mạng được kết nối giữa trung tâm dữ liệu nguồn và AWS, bạn có thể sử dụng  AWS Storage Gateway, Amazon Kinesis Data Firehose, Direct Connect, AWS Transfer Family services, Amazon S3 Transfer Acceleration, và AWS DataSync. Đối với việc di chuyển kho dữ liệu liên quan đến một khối lượng lớn dữ liệu hoặc nếu có những hạn chế với dung lượng mạng được kết nối với nhau, bạn có thể truyền dữ liệu bằng cách sử dụng dịch vụ AWS Snow Family. Với cách tiếp cận này, bạn có thể sao chép dữ liệu vào thiết bị, gửi lại cho AWS và sao chép dữ liệu vào Amazon Redshift thông qua Amazon S3.</p>
+<p>AWS SCT là một dịch vụ cần thiết để đẩy nhanh quá trình dịch chuyển kho dữ liệu của bạn sang Amazon Redshift. Bây giờ, chúng ta hãy đi sâu hơn vào nó.</p>
+<h4 id="dịch-chuyển-dữ-liệu-bằng-aws-sct">Dịch chuyển dữ liệu bằng AWS SCT</h4>
+<p>AWS SCT tự động hóa phần lớn quy trình chuyển đổi data warehouse schema của bạn sang Amazon Redshift database schema. Vì source and target database engines có thể có nhiều tính năng và khả năng khác nhau, AWS SCT cố gắng tạo một schema tương đương trong cơ sở dữ liệu mục tiêu của bạn bất cứ khi nào có thể. Nếu không thể chuyển đổi trực tiếp, AWS SCT sẽ tạo báo cáo đánh giá dịch chuyển cơ sở dữ liệu để giúp bạn chuyển đổi schema của mình. Báo cáo đánh giá dịch chuyển cơ sở dữ liệu cung cấp thông tin quan trọng về việc chuyển đổi schema từ cơ sở dữ liệu nguồn sang cơ sở dữ liệu đích của bạn. Báo cáo tóm tắt tất cả các nhiệm vụ chuyển đổi schema và nêu chi tiết các mục hành động cho các đối tượng schema không thể chuyển đổi sang công cụ DB của cơ sở dữ liệu mục tiêu của bạn. Báo cáo cũng bao gồm các ước tính về công sức sẽ cần để viết mã tương đương trong cơ sở dữ liệu mục tiêu của bạn mà không thể được chuyển đổi tự động.</p>
+<p>Tối ưu hoá lưu trữ là một trọng tâm của chuyển đổi kho dữ liệu. Khi sử dụng cơ sở dữ liệu Amazon Redshift của bạn làm nguồn và cơ sở dữ liệu Amazon Redshift thử nghiệm làm mục tiêu, AWS SCT đề xuất các sort keys và distribution keys để tối ưu hóa cơ sở dữ liệu của bạn.</p>
+<p>Với AWS SCT, bạn có thể chuyển đổi các data warehouse schemas sau sang Amazon Redshift:</p>
+<ul>
+<li>Amazon Redshift</li>
+<li>Azure Synapse Analytics (version 10)</li>
+<li>Greenplum Database (version 4.3 và mới hơn)</li>
+<li>Microsoft SQL Server (version 2008 và mới hơn)</li>
+<li>Netezza (version 7.0.3 và mới hơn)</li>
+<li>Oracle (version 10.2 và mới hơn)</li>
+<li>Snowflake (version 3)</li>
+<li>Teradata (version 13 và mới hơn)</li>
+<li>Vertica (version 7.2 và mới hơn)</li>
+</ul>
+<p>Tại AWS, chúng tôi tiếp tục phát hành các tính năng và cải tiến mới để cải thiện sản phẩm của mình. Để biết các chuyển đổi được hỗ trợ mới nhất, hãy truy cập AWS SCT User Guide.</p>
+<h4 id="dịch-chuyển-dữ-liệu-bằng-công-cụ-trích-xuất-dữ-liệu-aws-sct">Dịch chuyển dữ liệu bằng công cụ trích xuất dữ liệu AWS SCT</h4>
+<p>Bạn có thể sử dụng AWS SCT data extraction tool để trích xuất dữ liệu từ kho dữ liệu tại chỗ của mình và di chuyển dữ liệu đó sang Amazon Redshift. Chủ động trích xuất dữ liệu của bạn và tải dữ liệu lên Amazon S3 hoặc dịch vụ AWS Snowball Family để di chuyển quy mô lớn. Sau đó, bạn có thể sử dụng AWS SCT để sao chép dữ liệu sang Amazon Redshift. Amazon S3 là một dịch vụ lưu trữ và truy xuất. Để lưu trữ một đối tượng trong Amazon S3, bạn tiến hành upload file bạn muốn lưu trữ lên S3 bucket. Khi upload file lên, bạn có thể đặt quyền trên đối tượng và cả trên bất kỳ metadata nào.</p>
+<p>Trong quá trình dịch chuyển quy mô lớn liên quan đến việc upload dữ liệu lên dịch vụ AWS Snowball Family, bạn có thể sử dụng quy trình làm việc dựa trên trình hướng dẫn trong AWS SCT để tự động hóa quy trình mà trong đó công cụ trích xuất dữ liệu điều phối AWS DMS để thực hiện quá trình dịch chuyển.</p>
+<h4 id="các-cân-nhắc-đối-với-các-công-cụ-dịch-chuyển--dữ-liệu-lên-amazon-redshift">Các cân nhắc đối với các công cụ dịch chuyển  dữ liệu lên Amazon Redshift</h4>
+<p>Để cải thiện và đẩy nhanh quá trình dịch chuyển data warehouse sang Amazon Redshift, hãy xem xét các mẹo và phương pháp hay nhất sau đây. Danh sách này không phải là danh sách đầy đủ hoàn toàn. Đảm bảo rằng bạn hiểu rõ về kho dữ liệu của mình và xác định các phương pháp hay nhất mà bạn có thể sử dụng cho dự án dịch huyển của mình.</p>
+<ul>
+<li>Sử dụng AWS SCT để tạo báo cáo đánh giá dịch chuyển và công sức cho các tác vụ dịch chuyển.</li>
+<li>Tự động hóa dịch chuyển với AWS SCT nếu có thể. Kinh nghiệm từ khách hàng của chúng tôi cho thấy AWS SCT có thể tự động tạo phần lớn các tập lệnh DDL và SQL.</li>
+<li>Khi không thể chuyển đổi schema tự động, hãy sử dụng tập lệnh tùy chỉnh để chuyển đổi mã.</li>
+<li>Cài đặt các tác nhân trích xuất dữ liệu AWS SCT càng gần nguồn dữ liệu càng tốt để cải thiện độ tin cậy và hiệu suất dịch chuyển dữ liệu.</li>
+<li>Để cải thiện hiệu suất dịch chuyển dữ liệu, hãy định kích thước phù hợp của máy chủ ảo  Amazon Elastic Compute Cloud (Amazon EC2)  của bạn và các máy ảo tương đương mà tác nhân trích xuất dữ liệu được cài đặt trên đó.</li>
+<li>Định cấu hình nhiều agent trích xuất dữ liệu để chạy nhiều tác vụ song song nhằm cải thiện hiệu suất dịch chuyển dữ liệu bằng cách tối đa hóa việc sử dụng băng thông mạng hiện có.</li>
+<li>Điều chỉnh cấu hình bộ nhớ AWS SCT để cải thiện hiệu suất chuyển đổi schema.</li>
+<li>Sử dụng Amazon S3 để lưu trữ các đối tượng lớn như hình ảnh, PDF và dữ liệu nhị phân khác từ kho dữ liệu hiện có của bạn.</li>
+<li>Để dịch chuyển các bảng lớn, hãy sử dụng phân vùng ảo và tạo các tác vụ con để cải thiện hiệu suất dịch chuyển dữ liệu.</li>
+<li>Hiểu các trường hợp sử dụng của các dịch vụ AWS như AWS Direct Connect, AWS Transfer Family và Nhóm AWS Snow. Chọn dịch vụ hoặc công cụ phù hợp để đáp ứng các yêu cầu dịch chuyển dữ liệu của bạn.</li>
+<li>Hiểu quota của dịch vụ AWS và đưa ra quyết định thiết kế dịch chuyển phù hợp.</li>
+</ul>
+<h4 id="tóm-lược">Tóm lược</h4>
+<p>Dữ liệu đang phát triển về khối lượng và độ phức tạp nhanh hơn bao giờ hết. Tuy nhiên, chỉ một phần nhỏ của tài sản vô giá này là có sẵn để phân tích. Môi trường kho dữ liệu ( data warehouses ) truyền thống có kiến ​​trúc cứng nhắc, khó mở rộng quy mô cho các trường hợp sử dụng phân tích big data hiện đại. Các kho dữ liệu ( data warehouses ) này rất tốn kém để thiết lập và vận hành, đồng thời yêu cầu đầu tư rất lớn vào cả phần mềm và phần cứng.</p>
+<p>Trong bài viết này, chúng ta đã thảo luận về Amazon Redshift như một kho dữ liệu hiện đại có thể mở rộng, được quản lý hoàn toàn, có thể giúp bạn phân tích tất cả dữ liệu của mình và đạt được hiệu suất ở mọi quy mô với chi phí thấp và có thể dự đoán được. Để dịch chuyển kho dữ liệu của bạn sang Amazon Redshift, bạn cần xem xét một loạt các yếu tố, chẳng hạn như tổng kích thước của kho dữ liệu, tốc độ thay đổi dữ liệu và độ phức tạp của quá trình chuyển đổi dữ liệu, trước khi chọn một chiến lược và quy trình di chuyển phù hợp để giảm độ phức tạp và chi phí của dự án dịch chuyển kho dữ liệu của bạn. Với các dịch vụ AWS, chẳng hạn như AWS SCT và AWS DMS, và bằng cách áp dụng các mẹo và phương pháp hay nhất của các dịch vụ này, bạn có thể tự động hóa các nhiệm vụ dịch chuyển, quản lý quy mô dịch chuyển, đẩy nhanh việc thực hiện dự án dịch chuyển kho dữ liệu và làm hài lòng khách hàng của bạn.</p>
+
 
 
 
@@ -786,19 +971,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1655219073"></script>
-    <script src="/js/perfect-scrollbar.min.js?1655219073"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1655219073"></script>
-    <script src="/js/jquery.sticky.js?1655219073"></script>
-    <script src="/js/featherlight.min.js?1655219073"></script>
-    <script src="/js/highlight.pack.js?1655219073"></script>
+    <script src="/js/clipboard.min.js?1655221379"></script>
+    <script src="/js/perfect-scrollbar.min.js?1655221379"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1655221379"></script>
+    <script src="/js/jquery.sticky.js?1655221379"></script>
+    <script src="/js/featherlight.min.js?1655221379"></script>
+    <script src="/js/highlight.pack.js?1655221379"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1655219073"></script>
-    <script src="/js/learn.js?1655219073"></script>
-    <script src="/js/hugo-learn.js?1655219073"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1655221379"></script>
+    <script src="/js/learn.js?1655221379"></script>
+    <script src="/js/hugo-learn.js?1655221379"></script>
 
-    <link href="/mermaid/mermaid.css?1655219073" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1655219073"></script>
+    <link href="/mermaid/mermaid.css?1655221379" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1655221379"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -52,6 +52,8 @@
                 href="/vi/2-windowsonaws/2.1-blog-1/"
                 />
   </url><url>
+    <loc>/vi/4-dataanalytics/4.1-blog-1/</loc>
+  </url><url>
     <loc>/vi/1-awsarchitectureblog/1.2-blog-2/</loc>
   </url><url>
     <loc>/vi/2-windowsonaws/</loc>
@@ -91,8 +93,6 @@
                 hreflang="vi"
                 href="/vi/4-dataanalytics/"
                 />
-  </url><url>
-    <loc>/vi/4-dataanalytics/4.1-blog-1/</loc>
   </url><url>
     <loc>/vi/categories/</loc>
     <xhtml:link
