@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.99.1" />
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Giảm chi phí và tăng cường bảo mật với Amazon VPC Endpoints :: AWS VietNamese Blog</title>
+
+    
+    <link href="/css/nucleus.css?1655219073" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1655219073" rel="stylesheet">
+    <link href="/css/hybrid.css?1655219073" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1655219073" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1655219073" rel="stylesheet">
+    <link href="/css/auto-complete.css?1655219073" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1655219073" rel="stylesheet">
+    <link href="/css/theme.css?1655219073" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1655219073" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1655219073" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1655219073"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/vi/3-networkingonaws/3.1-blog-1/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1655219073"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1655219073"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1655219073"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsarchitectureblog/" title="AWS Architecture Blog" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsarchitectureblog/">
+           <b> 1. </b> AWS Architecture Blog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsarchitectureblog/1.1-blog-1/" title="Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsarchitectureblog/1.1-blog-1/">
+          Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsarchitectureblog/1.2-blog-2/" title="Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsarchitectureblog/1.2-blog-2/">
+          Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsarchitectureblog/1.3-blog-3/" title="Triển khai ứng dụng dựa trên Quarkus sử dụng AWS Lambda với AWS SAM" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsarchitectureblog/1.3-blog-3/">
+          Triển khai ứng dụng dựa trên Quarkus sử dụng AWS Lambda với AWS SAM
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-windowsonaws/" title="Windows on AWS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-windowsonaws/">
+           <b> 2. </b> Windows on AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-windowsonaws/2.1-blog-1/" title="Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/2-windowsonaws/2.1-blog-1/">
+          Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/3-networkingonaws/" title="Networking on AWS" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vi/3-networkingonaws/">
+           <b> 3. </b> Networking on AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/3-networkingonaws/3.1-blog-1/" title="Giảm chi phí và tăng cường bảo mật với Amazon VPC Endpoints" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="/vi/3-networkingonaws/3.1-blog-1/">
+          Giảm chi phí và tăng cường bảo mật với Amazon VPC Endpoints
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-dataanalytics/" title="Data Analytics on AWS" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-dataanalytics/">
+           <b> 4. </b> Data Analytics on AWS
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-dataanalytics/4.1-blog-1/" title="" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/4-dataanalytics/4.1-blog-1/">
+          
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="/vi/3-networkingonaws/3.1-blog-1/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=8002351&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>14-06-2022</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+            <i> <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng </a> <br>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>AWS Vietnamese Blog</a> > <a href='/vi/3-networkingonaws/'>Networking on AWS</a> > Giảm chi phí và tăng cường bảo mật với Amazon VPC Endpoints
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Giảm chi phí và tăng cường bảo mật với Amazon VPC Endpoints
+            </h1>
+          
+
+        
+
+
+
+	<h4 id="giảm-chi-phí-và-tăng-cường-bảo-mật-với-amazon-vpc-endpoints">Giảm chi phí và tăng cường bảo mật với Amazon VPC Endpoints</h4>
+<p>Bài viết này sẽ giải thích những lợi ích của việc sử dụng Amazon VPC endpoints và giới thiệu một self-paced workshop, chúng tôi sẽ giúp bạn tìm hiểu thêm về chúng. Amazon Virtual Private Cloud (Amazon VPC) cho phép bạn khởi chạy các tài nguyên của Amazon Web Services (AWS) vào một mạng ảo mà bạn đã xác định. Mạng ảo này giống mạng truyền thống mà bạn sẽ vận hành trong trung tâm dữ liệu của riêng mình. Lợi ích bổ sung là khả năng sử dụng cơ sở hạ tầng có thể mở rộng của AWS.</p>
+<p>VPC endpoint cho phép bạn kết nối riêng VPC của mình với các dịch vụ mà AWS hỗ trợ. Nó không yêu cầu bạn triển khai internet gateway và thiết bị network address translation (NAT) , kết nối Virtual Private Network (VPN), hoặc kết nối AWS Direct Connect. Endpoints là các thiết bị ảo được mở rộng qui mô theo chiều ngang, có dự phòng, và tính khả dụng cao. VPC endpoints cho phép giao tiếp giữa các instances trong VPC và các dịch vụ của bạn mà không gây ra bất cứ rủi ro nào về tính khả dụng hoặc hạn chế băng thông đối với network traffic của bạn.</p>
+<p>Bạn có thể tối ưu hóa network path bằng cách tránh lưu lượng truy cập đến các internet gateways và các chi phí phát sinh đến NAT gateways,  NAT instances hoặc phải duy trì các firewalls. VPC endpoints cũng cung cấp cho bạn khả năng kiểm soát tốt hơn nhiều đối với người dùng và các ứng dụng truy cập các dịch vụ của AWS. Có ba loại VPC endpoints: gateway load balancer endpoints, gateway endpoints và interface endpoints. Hãy cùng xem xét từng loại endpoint và cách chúng được sử dụng.</p>
+<p>Loại endpoint đầu tiên, Gateway Load Balancer endpoint, cho phép bạn chặn lưu lượng và định tuyến nó đến mạng hoặc các dịch vụ bảo mật mà bạn đã cấu hình bằng  Gateway Load Balancer. Gateway Load Balancer cho phép bạn triển khai, mở rộng quy mô và quản lý các thiết bị ảo, chẳng hạn như tường lửa, hệ thống phát hiện và ngăn chặn xâm nhập và hệ thống kiểm tra gói tin chi tiết. Đồng nghiệp của chúng tôi, Justin Davies đã viết một bài đăng trên blog xuất sắc về supported architectural patterns using AWS Gateway Load Balancers.</p>
+<p>Loại endpoint thứ hai, Gateway endpoint, cho phép bạn cung cấp quyền truy cập vào Amazon Simple Storage Service (S3) và Amazon DynamoDB. Bạn có thể cấu hình resource policies trên cả gateway endpoint và tài nguyên AWS mà endpoint cung cấp quyền truy cập. VPC endpoint policy là resource policy AWS Identity and Access Management (AWS IAM) mà bạn có thể đính kèm vào một endpoint. Đây là một policy riêng để kiểm soát truy cập từ endpoint đến dịch vụ được chỉ định. Điều này cho phép kiểm soát truy cập chi tiết và kết nối mạng riêng từ bên trong VPC. Ví dụ: bạn có thể tạo một policy hạn chế quyền truy cập vào một DynamoDB table cụ thể. Policy này sẽ chỉ cho phép một số người dùng hoặc nhóm nhất định truy cập vào bảng thông qua VPC endpoint.</p>
+<figure><img src="/images/3-NetworkingonAWS/3.1-Blog-1/0001.png" width="900pc"/><figcaption>
+            <h4>Hình 1: Truy cập Amazon S3 thông qua một Gateway VPC endpoint</h4>
+        </figcaption>
+</figure>
+
+<p>Loại endpoint thứ ba, Interface endpoint, cho phép bạn kết nối với các dịch vụ được hỗ trợ bởi  AWS PrivateLink. Điều này bao gồm một số lượng lớn các dịch vụ AWS. Nó cũng có thể bao gồm các dịch vụ được quản lý  bởi các khách hàng AWS khác và các đối tác của AWS Partner Network (APN) trong VPCs của riêng họ. Bằng cách sử dụng AWS partner services thông qua AWS PrivateLink, bạn không còn phải phụ thuộc các quyền truy cập vào public internet. Phí truyền dữ liệu cho lưu lượng truy cập từ Amazon EC2 đến internet thay đổi tùy theo khối lượng. Sau 1 GB / tháng đầu tiên (0,00 đô la mỗi GB), dữ liệu được tính phí ở mức 0,09 đô la / GB (đối với AWS US-East 1 Virginia). Giống như gateway endpoints, interface endpoints có thể được bảo mật bằng cách sử dụng các resource policies trên chính endpoint và resource mà endpoint cung cấp quyền truy cập. Interface endpoints cho phép sử dụng các security group để hạn chế quyền truy cập vào endpoint.</p>
+<figure><img src="/images/3-NetworkingonAWS/3.1-Blog-1/0002.png" width="900pc"/><figcaption>
+            <h4>Hình 2: Truy cập vào  QLDB thông qua một interface VPC endpoint</h4>
+        </figcaption>
+</figure>
+
+<p>Thiết kế mạng hiện có của một số tổ chức có thể ảnh hưởng đến nơi triển khai các VPC Endpoints. Trong các môi trường có nhiều tài khoản AWS, thiết kế mạng có thể khác nhau đáng kể. Hãy xem xét một tổ chức đã xây dựng kiến trúc network  hub-and-spoke với AWS Transit Gateway. VPCs đã được cấp phép cho nhiều tài khoản AWS, để tạo điều kiện  giúp tách biệt các network  hoặc để cho phép tính năng quản trị network uỷ quyền.</p>
+<p>Đối với các kiến trúc phân tán, bạn có thể xây dựng một “shared services” VPC, cung cấp quyền truy cập tập trung vào các dịch vụ được chia sẻ theo yêu cầu của khối lượng công việc trong mỗi VPC. Các dịch vụ dùng chung này có thể bao gồm các tài nguyên như  directory services hoặc VPC endpoints. Chia sẻ resources từ một vị trí trung tâm thay vì xây dựng chúng trong từng VPC có thể giảm chi phí và các chi phí quản lý.</p>
+<p>Cách tiếp cận này đã được đồng nghiệp của chúng tôi là Bhavin Desai nêu ra trong bài đăng trên blog của anh ấy, Centralized DNS management of hybrid cloud with Amazon Route 53 and AWS Transit Gateway. Thay vì tập trung triển khai VPC endpoint, người thiết kế network có thể chọn triển khai endpoints trong một spoke VPC để đảm bảo nó gần với một workload duy nhất sẽ sử dụng endpoint. Điều này có thể hỗ trợ các vấn đề về bảo mật hoặc hiệu suất cụ thể của workload. Với mỗi cách tiếp cận, tập trung và phân quyền, đều mang lại những lợi ích riêng. Người ta thường sử dụng cả hai để đáp ứng các yêu cầu cụ thể của mình trong từng trường hợp.</p>
+<figure><img src="/images/3-NetworkingonAWS/3.1-Blog-1/0003.png" width="900pc"/><figcaption>
+            <h4>Hình 3: VPC endpoints tập trung ( nhiều  VPCs)</h4>
+        </figcaption>
+</figure>
+
+<p>Ngoài ra, một tổ chức đã tập trung network của mình và chọn tận dụng chia sẻ VPC để cho phép nhiều tài khoản AWS tạo tài nguyên ứng dụng. Cách tiếp cận như vậy cho phép tổng hợp các EC2 instance, cơ sở dữ liệu Amazon Relational Database Service (RDS) và các AWS Lambda functions hoạt động thành một mạng chia sẻ, được quản lý tập trung. Với cả hai mô hình, việc thiết lập một bộ kiểm soát chi tiết để hạn chế quyền truy cập vào tài nguyên là rất quan trọng để hỗ trợ các bảo mật cho tổ chức và đáp ứng các mục tiêu về compliance. Đồng thời giúp duy trì hiệu quả hoạt động.</p>
+<figure><img src="/images/3-NetworkingonAWS/3.1-Blog-1/0004.png" width="900pc"/><figcaption>
+            <h4>Hình 4:  VPC endpoints tập trung ( nhiều  VPCs)</h4>
+        </figcaption>
+</figure>
+
+<h4 id="tìm-hiểu-cách-sử-dụng-với-vpc-endpoint-workshop">Tìm hiểu cách sử dụng với VPC Endpoint Workshop</h4>
+<p>Để hiểu hơn về cách hạn chế quyền truy cập vào các endpoints và các dịch vụ mà chúng kết nối có thể gây nhầm lẫn. Tìm hiểu thêm bằng cách tham gia VPC Endpoint Workshop. Nó sẽ giúp bạn cải thiện tình trạng bảo mật của các workload trên cloud của bạn bằng cách sử dụng các network controls và VPC endpoint policies để quản lý quyền truy cập vào tài nguyên AWS.</p>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/3-networkingonaws/" title="Networking on AWS"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/4-dataanalytics/" title="Data Analytics on AWS" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1655219073"></script>
+    <script src="/js/perfect-scrollbar.min.js?1655219073"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1655219073"></script>
+    <script src="/js/jquery.sticky.js?1655219073"></script>
+    <script src="/js/featherlight.min.js?1655219073"></script>
+    <script src="/js/highlight.pack.js?1655219073"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1655219073"></script>
+    <script src="/js/learn.js?1655219073"></script>
+    <script src="/js/hugo-learn.js?1655219073"></script>
+
+    <link href="/mermaid/mermaid.css?1655219073" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1655219073"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

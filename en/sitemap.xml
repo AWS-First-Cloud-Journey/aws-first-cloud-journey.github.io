@@ -28,6 +28,19 @@
                 href="/1-awsarchitectureblog/"
                 />
   </url><url>
+    <loc>/2-windowsonaws/2.1-blog-1/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/2-windowsonaws/2.1-blog-1/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/2-windowsonaws/2.1-blog-1/"
+                />
+  </url><url>
     <loc>/2-windowsonaws/</loc>
     <priority>0</priority>
     <xhtml:link
