@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>AWS Vietnamese Blog :: THIẾT LẬP VPC PEERING</title>
+    <title>Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF :: THIẾT LẬP VPC PEERING</title>
 
     
     <link href="/css/nucleus.css?1655198496" rel="stylesheet">
@@ -36,7 +36,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/vi/">
+  <body class="" data-url="/vi/1-awsarchitectureblog/1.3-blog-3/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -83,7 +83,7 @@
   
     
     <li data-nav-id="/vi/1-awsarchitectureblog/" title="AWS Architecture Blog" class="dd-item 
-        
+        parent
         
         
         ">
@@ -170,8 +170,8 @@
   
     
     <li data-nav-id="/vi/1-awsarchitectureblog/1.3-blog-3/" title="Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF" class="dd-item 
-        
-        
+        parent
+        active
         
         ">
       <a href="/vi/1-awsarchitectureblog/1.3-blog-3/">
@@ -231,7 +231,7 @@
                   
                     
                     
-                      <option id="en" value="/">English</option>
+                      <option id="en" value="/1-awsarchitectureblog/1.3-blog-3/">English</option>
                     
                   
               
@@ -245,7 +245,7 @@
                   
                     
                     
-                      <option id="vi" value="/vi/" selected>Tiếng Việt</option>
+                      <option id="vi" value="/vi/1-awsarchitectureblog/1.3-blog-3/" selected>Tiếng Việt</option>
                     
                   
               
@@ -306,24 +306,136 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>AWS Vietnamese Blog</a> > <a href='/vi/1-awsarchitectureblog/'>AWS Architecture Blog</a> > Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
         <div id="head-tags">
         
         </div>
         
         <div id="body-inner">
           
+            <h1>
+              
+              Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF
+            </h1>
+          
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fas fa-bars"></i> navigation</a>
-</span>
 
- 
-<h1 id="aws-vietnamese-blog">AWS Vietnamese Blog</h1>
-<h4 id="aws-architecture-blog1-awsarchitectureblog"><a href="1-awsarchitectureblog/">AWS Architecture Blog</a></h4>
+
+	<h4 id="dream11-ngặn-chặn-các-cuộc-tấn-công-qui-mô-lớn-ở-lớp-ứng-dụng-bằng-aws-waf">Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF</h4>
+<p>Là nền tảng fantasy sports lớn nhất thế giới với hơn 120 triệu người dùng, Dream11 chạy đồng thời nhiều contests trong khi xử lý hàng triệu yêu cầu của người dùng mỗi phút. Dream11 lấy người dùng làm chính và dữ liệu quan trọng của họ làm ưu tiên nhằm đảm bảo rằng ứng dụng Dream11 sẽ luôn bảo vệ người dùng trước tất cả các mối đe dọa và lỗ hổng bảo mật.</p>
+<ol>
+<li>Giới thiệu về AWS WAF Security Automations</li>
+</ol>
+<p>AWS WAF là một web application firewall giúp bảo vệ các ứng dụng và APIs khỏi các web exploits và bots phổ biến. Các cuộc tấn công này có thể ảnh hưởng đến tính khả dụng, xâm phạm bảo mật hoặc tiêu tốn quá nhiều tài nguyên của người dùng. AWS WAF cung cấp cho bạn quyền kiểm soát cách lưu lượng truy cập vào các ứng dụng của bạn. Bạn có thể tạo security rules nhằm kiểm soát lưu lượng truy cập của bot và chặn các mẫu tấn công phổ biến, chẳng hạn như SQL injection hoặc cross-site scripting (XSS).</p>
+<p>AWS WAF Security Automation sử dụng AWS CloudFormation để cấu hình nhanh các quy tắc AWS WAF giúp chặn các loại tấn công phổ biến sau:</p>
+<p>SQL injection
+Cross-site scripting
+HTTP floods
+Scanners and probes
+Known attacker origins (IP reputation lists)
+Bots and scrapers
+Trong bài đăng trên blog này, chúng tôi sẽ giải thích cách Dream11 sử dụng AWS WAF Security Automations để bảo vệ ứng dụng của bạn khỏi các cuộc tấn công từ scanners và probes attacks.</p>
+<ol start="2">
+<li>Scanner và probe automation</li>
+</ol>
+<p>Để hiểu về scanner và  probe automation, các bạn có thể xem một kịch bản tấn công thực tế đối với một ứng dụng cơ bản được AWS WAF bảo vệ. Giả sử rằng một kể tấn công đang cố gắng quét ứng dụng và xác định sơ hở bằng cách sử dụng công cụ tuỳ chỉnh của họ. Họ dự định tiến hành các cuộc tấn công injection (chẳng hạn như SQLi, XSS) hoặc các cuộc tấn công directory brute force.</p>
+<p>Ứng dụng lúc này được bảo mật bởi AWS WAF, có các quy tắc để chặn các yêu cầu nếu phát hiện các signatures và patterns phù hợp. AWS WAF không có tất cả các payload để chặn tất cả các kiểu tấn công. Điều này có nghĩa là sau một số lần thử và gặp lỗi, kẻ tấn công có thể tìm thấy phần payload không bị AWS WAF chặn và cố gắng khai thác lỗ hổng.</p>
+<p>Trong trường hợp này, điều gì sẽ xảy ra nếu AWS WAF có thể phát hiện hành vi của các IP vi phạm và chặn nó trong một khoảng thời gian nhất định? Sẽ thật tuyệt nếu AWS WAF chặn IP của một kẻ tấn công sau khi nhận được một vài yêu cầu độc hại phải không? Bằng cách đó, các yêu cầu mới đến từ IP đó sẽ bị chặn mà AWS WAF không cần phải kiểm tra tất cả các quy tắc trong web ACL. Với mọi nỗ lực vượt qua thành công thì IP vi phạm cũng sẽ bị chặn ngay lập tức. Thay vì chặn IP vĩnh viễn, tính năng này chặn IP vi phạm trong một khoảng thời gian nhất định, không cho kẻ tấn công thực hiện thêm bất kỳ lần thử nào. Nó hoạt động như một bước đầu tiên của phản ứng khi xảy ra sự cố bảo mật. Đây là lúcitự động hóa sẽ giúp ích cho bạn.</p>
+<p>Tính năng Scanner và probe automation giúp theo dõi Amazon CloudFront logs và phân tích mã trạng thái HTTP cho các yêu cầu đến từ các IP khác nhau. Dựa trên ngưỡng được cấu hình của HTTP status codes, scanner và probe automation sẽ cập nhật trực tiếp IP độc hại vào AWS WAF rule IPSet. Sau đó, nó sẽ chặn các yêu cầu tiếp theo từ IP đó trong một khoảng thời gian đã được định cấu hình.</p>
+<p>Giải pháp AWS WAF Security Automations tạo ra một AWS WAF rule, một AWS Lambda function và một truy vấn Scanner và Probes trên Amazon Athena. Câu truy vấn Athena sẽ phân tích vào Amazon CloudFront logs hoặc Application Load Balancer theo các khoảng thời gian đều đặn. Cứ mỗi phút, nó sẽ đếm số lượng yêu cầu bất thường từ các địa chỉ IP nguồn. Lambda function sẽ tiến hành cập nhật quy tắc AWS WAF IPSet để chặn thao tác scan từ các địa chỉ IP có tỷ lệ lỗi cao.</p>
+<p>Scanner và probe solution</p>
+<p>Hình 1. Kiến trúc giải pháp  scanner and probe automation (xxx thể hiện số liệu được định nghĩa theo từng trường hợp sử dụng )</p>
+<p>Quy trình làm việc của giải pháp như sau, thể hiện trong Hình 1:</p>
+<p>Các CloudFront logs được đẩy vào Amazon S3 bucket.
+Log Parser Lambda sẽ chạy truy vấn Athena để tìm ngưỡng mã lỗi cho từng địa chỉ IP duy nhất.
+Nếu ngưỡng lỗi HTTP bị vượt qua đối với bất kỳ IP nào, thì Lambda function sẽ cập nhật IP vào trong AWS WAF IPSet trong một thời gian nhất định.
+IPSet tự động được bỏ chặn sau khi khoảng thời gian kết thúc.</p>
+<ol start="3">
+<li>Tùy chỉnh giải pháp AWS WAF Security Automation</li>
+</ol>
+<p>Scanner và probe automation với các quy tắc sẽ block traffic nếu tỷ lệ lỗi cho một địa chỉ IP cụ thể vượt qua ngưỡng. Sau đó, nó thêm IP vào IPSet bị chặn. IP này bị chặn trong một khoảng thời gian và chúng ta có thể tuỳ chỉnh cấu hình cho chúng (ví dụ: 12 giờ, 2 ngày, 1 tuần).</p>
+<p>Trong quá trình thiết lập AWS WAF cho Dream11, có những trường hợp yêu cầu ngoại lệ đối với quy tắc trước đó. Một là để ngăn chặn các internal services, hai là gateway IPs khỏi bị chặn bởi security automation. Chúng ta cần tùy chỉnh các quy tắc cho các ngưỡng được xác định trước này. Ví dụ: Solution nên chặn lưu lượng truy cập bên ngoài, nhưng exclude bất kỳ internal IP addresses nào.</p>
+<p>Nhóm bảo mật Dream11 đã tùy chỉnh logic Lambda nhằm để phê duyệt tất cả các địa chỉ IPs của  internal NAT gateway. Scanner and probe automation bỏ qua các IP này ngay cả khi có nhiều lỗi từ các IP đã được phê duyệt. Mã mẫu như sau:</p>
+<p>log.info(&quot;[update_ip_set] \tIgnore the approved IP &ldquo;)
+if ip_type == &ldquo;IPV4&rdquo; and source_ip not in outstanding_requesters[&lsquo;ApprovedIPs&rsquo;]:<br>
+addresses_v4.append(source_ip)
+elif ip_type == &ldquo;IPV6&rdquo; and source_ip not in outstanding_requesters[&lsquo;ApprovedIPs&rsquo;]:                 	addresses_v6.append(source_ip)
+Lưu ý: Tạo tệp JSON với danh sách các IP được chấp thuận và lưu trữ trong APP_ACCESS_LOG_BUCKET
+Chúng tôi sẽ sử dụng cùng một S3 bucket để đặt các IP được phê duyệt dưới dạng tệp xyz.json, nơi chúng ta lưu trữ log truy cập CloudFront của mình. Điều này có thể định cấu hình trong file CloudFormation template dành cho Security Automation.</p>
+<p>Giải thích mã:
+Trước tiên, custom code xác thực IP cụ thể mà ngưỡng lỗi được vượt quá , ngoại trừ các IP đã được phê duyệt.
+Nếu IP thuộc định dạng IPV4 hoặc IPV6 và không phải là IP được phê duyệt, thì IP đó sẽ được thêm vào IPSet bị chặn trong một khoảng thời gian nhất định.</p>
+<p>Việc tùy chỉnh Lambda function sẽ cung cấp các giải pháp security automation mà điều đó sẽ không chặn bất kỳ request hợp lệ nào. Đồng thời, nó cung cấp khả năng bảo vệ chống lại  các cuộc tấn công dạng scanner and probe.  AWS WAF security automation là một giải pháp mã nguồn mở và được lưu trữ trên GitHub.</p>
+<p>4.Kết luận</p>
+<p>Trong bài đăng trên blog này, chúng tôi đã đưa ra một cái nhìn tổng quan ngắn gọn về cách bạn có thể giảm thiểu các cuộc tấn công bằng cách sử dụng AWS WAF security automation chống lại scanner and probe attacks. Chúng tôi cũng đã minh họa sự tùy chỉnh được thực hiện bởi nhóm bảo mật Dream11.</p>
+<p>Bằng cách tự động hóa các hoạt động bảo mật của mình, bạn sẽ cải thiện khả năng ứng phó sự cố hiệu quả. Bạn có thể sắp xếp thứ tự ưu tiên cho các mối đe dọa và xử lý các cuộc tấn công mạng một cách tự động với các hành động tự động. Điều này làm giảm nhu cầu can thiệp, giảm thời gian của bạn và nó có thể giải quyết các vấn đề bảo mật mà không cần các bạn ngồi làm thủ công.</p>
+<p>Sau khi triển khai điều này tại Dream11, chúng ta đã có thể tạo các tuỳ chỉnh dành riêng cho ứng dụng cụ thể của mình để chặn các kiểu tấn công. Điều này đã cung cấp tính khả dụng của ứng dụng, bảo mật tài nguyên và ngăn chặn việc tiêu thụ tài nguyên quá mức. Với giải pháp này, chúng tôi có thể cung cấp trải nghiệm fantasy sports tốt nhất cho hơn 120 triệu người dùng.</p>
+
+
+
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
         
         </div> 
         
@@ -355,8 +467,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -367,6 +477,25 @@
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -389,21 +518,6 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -428,8 +542,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="/vi/1-awsarchitectureblog/1.2-blog-2/" title="Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="/vi/1-awsarchitectureblog/" title="AWS Architecture Blog" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="/vi/1-awsarchitectureblog/1.1-blog-1/" title="Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -467,4 +583,3 @@
 </script>
   </body>
 </html>
-

@@ -26,6 +26,42 @@
                 href="/vi/"
                 />
   </url><url>
+    <loc>/vi/1-awsarchitectureblog/1.1-blog-1/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/1-awsarchitectureblog/1.1-blog-1/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/1-awsarchitectureblog/1.1-blog-1/"
+                />
+  </url><url>
+    <loc>/vi/1-awsarchitectureblog/1.2-blog-2/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/1-awsarchitectureblog/1.2-blog-2/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/1-awsarchitectureblog/1.2-blog-2/"
+                />
+  </url><url>
+    <loc>/vi/1-awsarchitectureblog/1.3-blog-3/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/1-awsarchitectureblog/1.3-blog-3/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/1-awsarchitectureblog/1.3-blog-3/"
+                />
+  </url><url>
     <loc>/vi/categories/</loc>
     <xhtml:link
                 rel="alternate"

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.99.1" />
+    <meta name="description" content="">
+<meta name="author" content="journeyoftheaverageguy@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại :: THIẾT LẬP VPC PEERING</title>
+
+    
+    <link href="/css/nucleus.css?1655198496" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1655198496" rel="stylesheet">
+    <link href="/css/hybrid.css?1655198496" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1655198496" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1655198496" rel="stylesheet">
+    <link href="/css/auto-complete.css?1655198496" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1655198496" rel="stylesheet">
+    <link href="/css/theme.css?1655198496" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1655198496" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1655198496" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1655198496"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/vi/1-awsarchitectureblog/1.1-blog-1/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1655198496"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1655198496"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1655198496"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsarchitectureblog/" title="AWS Architecture Blog" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/vi/1-awsarchitectureblog/">
+           <b>  </b> AWS Architecture Blog
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsarchitectureblog/1.1-blog-1/" title="Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại" class="dd-item 
+        parent
+        active
+        
+        ">
+      <a href="/vi/1-awsarchitectureblog/1.1-blog-1/">
+          Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsarchitectureblog/1.2-blog-2/" title="Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsarchitectureblog/1.2-blog-2/">
+          Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-awsarchitectureblog/1.3-blog-3/" title="Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/vi/1-awsarchitectureblog/1.3-blog-3/">
+          Dream11: Ngặn chặn các cuộc tấn công qui mô lớn ở lớp ứng dụng bằng AWS WAF
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="/1-awsarchitectureblog/1.1-blog-1/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="/vi/1-awsarchitectureblog/1.1-blog-1/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=8002351&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>14-06-2022</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+            <i> <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng </a> <br>
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>AWS Vietnamese Blog</a> > <a href='/vi/1-awsarchitectureblog/'>AWS Architecture Blog</a> > Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+        <li><a href="#tóm-lược">Tóm lược</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại
+            </h1>
+          
+
+        
+
+
+
+	<h4 id="insights-for-ctos-part-3--phát-triển-kinh-doanh-với-năng-lực-dữ-liệu-hiện-đại">Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại</h4>
+<h4 id="bài-đăng-này-được-viết-cùng-với-với-jonathan-hwang-người-đứng-đầu-foundation-data-analytics-tại--zendesk">Bài đăng này được viết cùng với với Jonathan Hwang, người đứng đầu Foundation Data Analytics tại  Zendesk.</h4>
+<p>Với vai trò là Senior Solutions Architect, tôi đã nói chuyện với các Chief technology officers (CTOs) và ban lãnh đạo điều hành của các doanh nghiệp lớn như các ngân hàng lớn, các doanh nghiệp software as a service (SaaS), các doanh nghiệp SMB và các công ty khởi nghiệp.</p>
+<p>Qua 6 phần trong bài viết này, tôi sẽ chia sẻ những hiểu biết và kiến thức được tổng hợp từ nhiều Giám đốc Công nghệ và các nhà Lãnh đạo Kỹ thuật trong hành trình áp dụng công nghệ Điện toán đám mây. Dưới đây là những đúc kết về các cách áp dụng hay nhất về kiến trúc Điện toán đám mây được xây dựng trên kết quả thực hành của tôi để giúp bạn xây dựng và điều hành thành công các ứng dụng trên Cloud. Các cách áp dụng đa dạng khía cạnh bao gồm Xây dựng và vận hành ứng dụng, Bảo mật, Quản lý tài chính , Trí tuệ nhân tạo, các mô hình vận hành và chiến lược để dịch chuyển lên Cloud.</p>
+<p>Trong Phần 3, cùng với người đứng đầu Foundation Analytics tại Zendesk, Jonathan Hwang, chúng tôi chỉ ra cách Zendesk từng bước mở rộng dữ liệu và khả năng phân tích của họ để sử dụng hiệu quả nguồn dữ liệu và thông tin mà họ thu thập được từ những tương tác của khách hàng. Bạn có thể tìm hiểu cách Zendesk xây dựng một kiến trúc dữ liệu hiện đại  bằng cách sử dụng dịch vụ Amazon Simple Storage Service (Amazon S3) để lưu trữ, Apache Hudi để xử lý dữ liệu phân cấp và  AWS Lake Formation  để kiểm soát truy cập chi tiết.</p>
+<h4 id="tại-sao-zendesk-cần-xây-dựng-và-mở-rộng-quy-mô-nền-tảng-dữ-liệu-của-họ">Tại sao Zendesk cần xây dựng và mở rộng quy mô nền tảng dữ liệu của họ</h4>
+<p>Zendesk là một nền tảng dịch vụ khách hàng, nơi kết nối hơn 100.000 thương hiệu với hàng trăm triệu khách hàng qua điện thoại, trò chuyện, email, nhắn tin, các kênh xã hội, cộng đồng, trang web đánh giá và trung tâm trợ giúp. Họ thu thập và sử dụng dữ liệu từ các kênh này để đưa ra các quyết định cho chiến lược kinh doanh tốt nhất và tạo ra các sản phẩm mới và cải tiến các sản phẩm khác.</p>
+<p>Vào năm 2014, đội ngũ chuyên về dữ liệu của Zendesk đã xây dựng phiên bản đầu tiên của nền tảng dữ liệu lớn (Big Data) trong trung tâm dữ liệu của riêng họ bằng cách sử dụng Apache Hadoop để áp dụng Máy học (Machine Learning). Cùng với đó, họ đã tung ra Answer Bot và Zendesk Benchmark report. Những sản phẩm này rất thành công đến nỗi chúng sớm sử dụng hết tài nguyên tính toán có sẵn trong trung tâm dữ liệu.</p>
+<p>Vào cuối năm 2017, Zendesk nhận định rõ ràng nhu cầu cấp thiết của họ về việc hiện đại hóa dữ liệu và nhân rộng khả năng xử lý dữ liệu bằng cách dịch chuyển lên Đám mây (Cloud)</p>
+<h4 id="ngày-càng-hiện-đại-hóa-khả-năng-xử-lý-dữ-liệu">Ngày càng hiện đại hóa khả năng xử lý dữ liệu</h4>
+<p>Zendesk đã xây dựng và mở rộng khối lượng công việc của họ để sử dụng các hồ chứa dữ liệu (data lakes) trên AWS, nhưng họ sớm gặp phải những thách thức về kiến trúc mới:</p>
+<p>Quy tắc &ldquo;right to be forgotten&rdquo; trong General Data Protection Regulation (GDPR) đã gây khó khăn và tốn kém cho việc duy trì các hồ chứa dữ liệu (data lakes), bởi vì việc xóa một phần dữ liệu nhỏ cần phải xử lý lại các bộ dữ liệu lớn.
+Gặp khó khăn trong việc quản lý về Bảo Mật và Quản trị hơn khi hồ chứa dữ liệu (data lakes) được mở rộng cho một lượng người dùng lớn hơn.</p>
+<p>Các phần sau đây cho bạn biết cách Zendesk đang giải quyết các quy tắc GDPR bằng cách phát triển từ các tệp Apache Parquet thuần trên Amazon S3 thành các Hudi dataset trên Amazon S3 để cho phép chèn / cập nhật / xóa ở mức độ dòng. Để giải quyết vấn đề bảo mật và quản trị, Zendesk đang chuyển sang AWS Lake Formation Bảo mật tập trung để kiểm soát truy cập chi tiết trên quy mô lớn.</p>
+<h4 id="nền-tảng-dữ-liệu-của-zendesk">Nền tảng dữ liệu của Zendesk</h4>
+<p>Hình 1 mô phỏng nền tảng dữ liệu hiện tại của Zendesk. Nền tảng hiện tại bao gồm ba đường dẫn dữ liệu (data pipelines): “Data Hub,” “Data Lake,” and “Self Service.”</p>
+<p>Data Lake pipelines</p>
+<p>Data Lake và Data Hub pipelines bao gồm toàn bộ vòng đời của dữ liệu từ khi được thu thập đến khi được sử dụng.</p>
+<p>Data Lake pipelines hợp nhất dữ liệu từ cơ sở dữ liệu có độ phân tán cao của Zendesk thành một hồ chứa dữ liệu (data lake) để phân tích.</p>
+<p>Zendesk sử dụng Amazon Database Migration Service (AWS DMS) để  thực hiện change data capture (CDC) từ hơn 1.800 Amazon Aurora MySQL databases trong 8 AWS Regions. Nó phát hiện các transaction bị thay đổi và cập nhật chúng vào hồ chứa dữ liệu (data lake) bằng cách sử dụng Amazon EMR và Hudi.</p>
+<p>Zendesk ticket data bao gồm hơn 10 tỷ sự kiện và có quy mô lên đến petabyte dữ liệu. Các file trong hồ chứa dữ liệu (data lake) trong  Amazon S3 được chuyển đổi và lưu trữ ở định dạng Apache Hudi và được đăng ký trên AWS Glue catalog và nó luôn sẵn sàng với tư cách là bảng dữ liệu để phục vụ cho truy vấn phân tích qua Amazon Athena.</p>
+<h4 id="data-hub-pipelines">Data Hub pipelines</h4>
+<p>Các Data Hub pipelines tập trung vào các sự kiện ở thời gian thực và các trường hợp sử dụng phân tích dữ liệu streaming (streaming analytics ) với Apache Kafka. Bất kỳ ứng dụng nào tại Zendesk đều có thể đưa các sự kiện lên global Kafka message bus. Apache Flink nhập các sự kiện này vào Amazon S3.</p>
+<p>Data Hub cung cấp dữ liệu doanh nghiệp chất lượng cao, có tính khả dụng và khả năng nhân rộng cao.</p>
+<h4 id="self-managed-pipeline">Self-managed pipeline</h4>
+<p>Các đường dẫn dữ liệu tự quản lý cho phép các đội kỹ sư sản phẩm sử dụng hồ chứa dữ liệu (data lake) cho những trường hợp sử dụng không phù hợp với các mẫu tích hợp tiêu chuẩn. Tất cả các đội kỹ sư sản phẩm trong nội bộ của Zendesk có thể sử dụng các công cụ cơ bản như Amazon EMR, Amazon S3, Athena, và AWS Glue để xuất bản bộ dữ liệu phân tích  của riêng họ và chia sẻ với các đội khác.</p>
+<p>Một ví dụ đáng chú ý về vấn đề này là từ nhóm kỹ sư phát hiện sự gian lận ( fraud detection ) của Zendesk. Họ xuất bản dữ liệu và phát hiện gian lận thông qua nền tảng hồ chứa dữ liệu tự quản lý của chúng tôi và sử dụng  Amazon QuickSight để trực quan hóa.
+Bạn cần mô hình bảo mật và tuân thủ chi tiết</p>
+<p>Các hồ chứa dữ liệu có thể thúc đẩy tăng trưởng thông qua việc ra quyết định và đổi mới sản phẩm nhanh hơn. Tuy nhiên, chúng cũng có thể mang đến những thách thức mới về bảo mật và tuân thủ:</p>
+<ul>
+<li>Khả năng Hiển thị và Khả năng Kiểm tra. Ai có quyền truy cập vào dữ liệu nào? Mọi người có cấp độ truy cập nào và làm thế nào / khi nào và ai đang truy cập nó?</li>
+<li>Kiểm soát quyền truy cập cụ thể. Làm cách nào để bạn xác định và thực thi quyền truy cập đặc quyền ít nhất vào các tập con dữ liệu trên quy mô lớn mà không tạo ra tắc nghẽn hoặc sự phụ thuộc vào  yếu tố con người /đội ngũ chủ chốt.</li>
+</ul>
+<p>Lake Formation giúp giải quyết những khúc mắc này bằng cách kiểm tra quyền truy cập dữ liệu và cung cấp bảo mật cấp  dòng và cột cũng như mô hình kiểm soát truy cập được ủy quyền để tạo ra các trình quản lý dữ liệu cho hệ thống Bảo Mật và Quản Trị của bạn</p>
+<p>Zendesk đã sử dụng Lake Formation để xây dựng một mô hình kiểm soát truy cập chi tiết sử dụng Bảo mật cấp dòng. Nó phát hiện các loại dữ liệu và thông tin cá nhân (Personally Identifiable Information - PII) ngay cả khi mở rộng qui mô hồ chứa dữ liệu (data lake).</p>
+<p>Một số khách hàng của Zendesk từ chối đưa dữ liệu và thông tin của họ vào hệ thống Máy học (Machine Learning) hoặc  trong các dự án khảo sát thị trường. Zendesk sử dụng Lake Formation để áp dụng bảo mật cấp hàng nhằm lọc ra các hồ sơ liên quan đến danh sách tài khoản khách hàng đã chọn không tham gia. Chúng cũng giúp người dùng dữ liệu có thể hiểu được bảng dữ liệu nào chứa PII bằng cách tự động phát hiện và gắn thẻ các cột trong danh mục dữ liệu bằng AWS Glue’s PII detection algorithm.
+Giá trị của việc xử lý các dữ liệu thời gian thực</p>
+<p>Khi bạn xử lý dữ liệu càng nhanh và sớm sau khi dữ liệu được tạo, quyết định sẽ được đưa ra nhanh hơn và chính xác hơn
+Các thiết kế mẫu trong phân tích dữ liệu streaming, được thực hiện bằng cách sử dụng các dịch vụ như  Amazon Managed Streaming for Apache Kafka (Amazon MSK) hoặc Amazon Kinesis, tạo ra một enterprise eventbus để trao đổi dữ liệu giữa các ứng dụng không đồng nhất trong thời gian thực.</p>
+<p>Ví dụ: người ta thường sử dụng tính năng streaming để tăng cường quá trình thu thập dữ liệu (data ingestion) từ CSDL truyền thống bằng phương pháp CDC vào data lake cùng với quá trình streaming ingestion bổ sung cho các application events. 
+CDC là một mẫu thiết kế kiến trúc thu thập dữ liệu phổ biến, nhưng thông tin có thể ở mức quá chi tiết. Điều này yêu cầu bối cảnh ứng dụng phải được tái tạo lại trong data lake và business logic phải được sử giống giống nhau ở hai nơi, bên trong ứng dụng và trong lớp xử lý data lake. Điều này tạo ra nguy cơ trình bày sai ngữ nghĩa của ngữ cảnh ứng dụng.</p>
+<p>Zendesk đã phải đối mặt với thách thức này khi thực hiện CDC data lake ingestion của họ từ các Aurora clusters. Họ đã tạo một event bus được xây dựng với Apache Kafka để tăng cường CDC của họ với các application domain events cấp cao hơn để trao đổi trực tiếp giữa các ứng dụng không đồng nhất.</p>
+<h4 id="kiến-trúc-streaming-của-zendesk">Kiến trúc streaming của Zendesk</h4>
+<p>CDC database ticket table schema đôi khi có thể chứa các thuộc tính phức tạp và không cần thiết dành riêng cho ứng dụng và không thể hiện được domain model của ticket. Điều này khiến cho downstream consumers không hiểu để sử dụng dữ liệu. Một ticket domain object có thể bao gồm một số database tables khi được modeled ở dạng third normal form, điều này làm cho việc truy vấn đối với các nhà phân tích trở nên khó khăn. Đây cũng là một phương pháp tích hợp dễ gây ra vấn đề vì các ứng dụng và dịch vụ sử dụng dữ liệu có thể dễ dàng bị ảnh hưởng khi logic của ứng dụng thay đổi, điều này khiến cho việc thiết lập một chế độ xem dữ liệu chung trở nên khó khăn.</p>
+<p>Để hướng tới giao tiếp dựa trên sự kiện giữa các microservices, Zendesk đã tạo dự án Platform Data Architecture (PDA), sử dụng standard object model để thể hiện chế độ xem ngữ nghĩa, cấp cao hơn của dữ liệu ứng dụng của họ. Standard objects là các domain objects được thiết kế để giao tiếp giữa nhiều domain và không chịu ảnh hưởng bởi cơ chế  CDC. Cuối cùng, Zendesk đặt mục tiêu chuyển đổi data architecture của họ từ một tập hợp các isolated products và data silos thành một nền tảng dữ liệu thống nhất gắn kết.</p>
+<p>Hình 2. Một góc nhìn ứng dụng của kiến trúc streaming Zendesk.</p>
+<p>Hình 2 cho thấy cách tất cả các sản phẩm và người dùng của Zendesk tích hợp thông qua các standard objects chung và các standard events trong Data Hub. Các ứng dụng publish và sử dụng ( consume )  standard objects và events  đều đến từ event bus.</p>
+<p>Ví dụ, một complete ticket standard object sẽ được xuất bản lên eventbus bất cứ khi nào nó được tạo, cập nhật hoặc thay đổi. Về mặt sử dụng ( consume ), các sự kiện này được nhóm sản phẩm sử dụng để kích hoạt các khả năng của nền tảng như tìm kiếm, xuất dữ liệu, phân tích và trang tổng quan báo cáo.</p>
+<h3 id="tóm-lược">Tóm lược</h3>
+<p>Khi hoạt động kinh doanh của Zendesk phát triển,  data lake của họ đã phát triển từ các tệp Parquet đơn giản trên Amazon S3 thành data lake và có thể cập nhật tăng dần dựa trên kiến trúc Hudi hiện đại. Giờ đây, các chính sách bảo mật IAM của họ được sử dụng nhằm kiểm soát truy cập chi tiết thông qua Lake Formation.</p>
+<p>Chúng tôi đã nhiều lần chứng kiến những cải tiến về mặt kiến trúc một cách từ từ đạt được thành công vì nó  làm giảm rủi ro kinh doanh liên quan đến sự thay đổi và cung cấp đủ thời gian cho nhóm của bạn để tìm hiểu và đánh giá các hoạt động và các dịch vụ được quản lý trên Cloud.</p>
+<p>Nếu bạn muốn tìm kiếm thêm nội dung về kiến trúc? AWS Architecture Center cung cấp các sơ đồ kiến trúc tham chiếu, các giải pháp kiến trúc đã được hiệu chỉnh, các phương pháp hay nhất  Well-Architected, các mẫu, biểu tượng và hơn thế nữa!</p>
+<p>Các bài viết khác trong loạt bài này</p>
+<ol>
+<li><a href="https://aws.amazon.com/blogs/architecture/insights-for-ctos-part-1-building-and-operating-cloud-applications/">Insights for CTOs: Part 1 – Building and Operating Cloud Applications</a></li>
+<li><a href="https://aws.amazon.com/blogs/architecture/insights-for-ctos-part-2-enable-good-decisions-at-scale-with-robust-security/">Insights for CTOs: Part 2 – Enable Good Decisions at Scale with Robust Security</a></li>
+</ol>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/1-awsarchitectureblog/" title="AWS Architecture Blog"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/1-awsarchitectureblog/1.2-blog-2/" title="Khởi chạy Microsoft Windows Server instances trên Amazon EC2 nhanh hơn tới 65% so với trước đây" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1655198496"></script>
+    <script src="/js/perfect-scrollbar.min.js?1655198496"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1655198496"></script>
+    <script src="/js/jquery.sticky.js?1655198496"></script>
+    <script src="/js/featherlight.min.js?1655198496"></script>
+    <script src="/js/highlight.pack.js?1655198496"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1655198496"></script>
+    <script src="/js/learn.js?1655198496"></script>
+    <script src="/js/hugo-learn.js?1655198496"></script>
+
+    <link href="/mermaid/mermaid.css?1655198496" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1655198496"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
