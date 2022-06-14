@@ -9,24 +9,24 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại :: THIẾT LẬP VPC PEERING</title>
+    <title>Insights for CTOs: Part 3 – Phát triển kinh doanh với năng lực dữ liệu hiện đại :: AWS VietNamese Blog</title>
 
     
-    <link href="/css/nucleus.css?1655203575" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1655203575" rel="stylesheet">
-    <link href="/css/hybrid.css?1655203575" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1655203575" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1655203575" rel="stylesheet">
-    <link href="/css/auto-complete.css?1655203575" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1655203575" rel="stylesheet">
-    <link href="/css/theme.css?1655203575" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1655203575" rel="stylesheet">
+    <link href="/css/nucleus.css?1655204679" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1655204679" rel="stylesheet">
+    <link href="/css/hybrid.css?1655204679" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1655204679" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1655204679" rel="stylesheet">
+    <link href="/css/auto-complete.css?1655204679" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1655204679" rel="stylesheet">
+    <link href="/css/theme.css?1655204679" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1655204679" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1655203575" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1655204679" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1655203575"></script>
+    <script src="/js/jquery-3.3.1.min.js?1655204679"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1655203575"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1655203575"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1655204679"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1655204679"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1655203575"></script>
+<script type="text/javascript" src="/js/search.js?1655204679"></script>
 
     
   </div>
@@ -401,7 +401,7 @@
 
 
 	<h4 id="bài-đăng-này-được-viết-cùng-với-với-jonathan-hwang-người-đứng-đầu-foundation-data-analytics-tại-zendeskhttpwwwzendeskcom">Bài đăng này được viết cùng với với <strong>Jonathan Hwang</strong>, người đứng đầu [Foundation Data Analytics tại <a href="http://www.zendesk.com/">Zendesk</a>.</h4>
-<p>Với vai trò là Senior Solutions Architect, tôi đã nói chuyện với các Chief technology officers (CTOs) và ban lãnh đạo điều hành của các doanh nghiệp lớn như các ngân hàng lớn, các doanh nghiệp software as a service (SaaS), các doanh nghiệp SMB và các công ty khởi nghiệp.</p>
+<p>Với vai trò là <strong>Senior Solutions Architect</strong>, tôi đã nói chuyện với các <strong>Chief technology officers (CTOs)</strong> và ban lãnh đạo điều hành của các doanh nghiệp lớn như các ngân hàng lớn, các doanh nghiệp <strong>software as a service (SaaS)</strong>, các doanh nghiệp SMB và các công ty khởi nghiệp.</p>
 <p>Qua 6 phần trong bài viết này, tôi sẽ chia sẻ những hiểu biết và kiến thức được tổng hợp từ nhiều Giám đốc Công nghệ và các nhà Lãnh đạo Kỹ thuật trong hành trình áp dụng công nghệ Điện toán đám mây. Dưới đây là những đúc kết về các cách áp dụng hay nhất về kiến trúc Điện toán đám mây được xây dựng trên kết quả thực hành của tôi để giúp bạn xây dựng và điều hành thành công các ứng dụng trên Cloud. Các cách áp dụng đa dạng khía cạnh bao gồm Xây dựng và vận hành ứng dụng, Bảo mật, Quản lý tài chính , Trí tuệ nhân tạo, các mô hình vận hành và chiến lược để dịch chuyển lên Cloud.</p>
 <p>Trong Phần 3, cùng với người đứng đầu Foundation Analytics tại Zendesk, Jonathan Hwang, chúng tôi chỉ ra cách Zendesk từng bước mở rộng dữ liệu và khả năng phân tích của họ để sử dụng hiệu quả nguồn dữ liệu và thông tin mà họ thu thập được từ những tương tác của khách hàng. Bạn có thể tìm hiểu cách Zendesk xây dựng một kiến trúc dữ liệu hiện đại  bằng cách sử dụng dịch vụ Amazon Simple Storage Service (Amazon S3) để lưu trữ, Apache Hudi để xử lý dữ liệu phân cấp và  AWS Lake Formation  để kiểm soát truy cập chi tiết.</p>
 <h4 id="tại-sao-zendesk-cần-xây-dựng-và-mở-rộng-quy-mô-nền-tảng-dữ-liệu-của-họ">Tại sao Zendesk cần xây dựng và mở rộng quy mô nền tảng dữ liệu của họ</h4>
@@ -417,7 +417,7 @@
 <p>Các phần sau đây cho bạn biết cách Zendesk đang giải quyết các quy tắc GDPR bằng cách phát triển từ các tệp Apache Parquet thuần trên Amazon S3 thành các Hudi dataset trên Amazon S3 để cho phép chèn / cập nhật / xóa ở mức độ dòng. Để giải quyết vấn đề bảo mật và quản trị, Zendesk đang chuyển sang <a href="https://aws.amazon.com/lake-formation/">AWS Lake Formation</a> Bảo mật tập trung để kiểm soát truy cập chi tiết trên quy mô lớn.</p>
 <h4 id="nền-tảng-dữ-liệu-của-zendesk">Nền tảng dữ liệu của Zendesk</h4>
 <p>Hình 1 mô phỏng nền tảng dữ liệu hiện tại của Zendesk. Nền tảng hiện tại bao gồm ba đường dẫn dữ liệu (data pipelines): “Data Hub,” “Data Lake,” and “Self Service.”</p>
-<figure><img src="/images/1-AWSArchitectureBlog/1.1-Blog-1/0001.png" width="750pc"/><figcaption>
+<figure><img src="/images/1-AWSArchitectureBlog/1.1-Blog-1/0001.png" width="900pc"/><figcaption>
             <h4>Hình 1. Zendesk data pipelines</h4>
         </figcaption>
 </figure>
@@ -425,31 +425,31 @@
 <h4 id="data-lake-pipelines">Data Lake pipelines</h4>
 <p>Data Lake và Data Hub pipelines bao gồm toàn bộ vòng đời của dữ liệu từ khi được thu thập đến khi được sử dụng.</p>
 <p>Data Lake pipelines hợp nhất dữ liệu từ cơ sở dữ liệu có độ phân tán cao của Zendesk thành một hồ chứa dữ liệu (data lake) để phân tích.</p>
-<p>Zendesk sử dụng Amazon Database Migration Service (AWS DMS) để  thực hiện change data capture (CDC) từ hơn 1.800 Amazon Aurora MySQL databases trong 8 AWS Regions. Nó phát hiện các transaction bị thay đổi và cập nhật chúng vào hồ chứa dữ liệu (data lake) bằng cách sử dụng Amazon EMR và Hudi.</p>
-<p>Zendesk ticket data bao gồm hơn 10 tỷ sự kiện và có quy mô lên đến petabyte dữ liệu. Các file trong hồ chứa dữ liệu (data lake) trong  Amazon S3 được chuyển đổi và lưu trữ ở định dạng Apache Hudi và được đăng ký trên AWS Glue catalog và nó luôn sẵn sàng với tư cách là bảng dữ liệu để phục vụ cho truy vấn phân tích qua Amazon Athena.</p>
+<p>Zendesk sử dụng <a href="https://aws.amazon.com/dms/">Amazon Database Migration Service (AWS DMS)</a> để  thực hiện <a href="https://en.wikipedia.org/wiki/Change_data_capture">change data capture (CDC)</a> từ hơn 1.800 <a href="https://aws.amazon.com/rds/aurora/">Amazon Aurora MySQL databases</a> trong 8 AWS Regions. Nó phát hiện các transaction bị thay đổi và cập nhật chúng vào hồ chứa dữ liệu (data lake) bằng cách sử dụng <a href="https://aws.amazon.com/emr/">Amazon EMR</a> và Hudi.</p>
+<p>Zendesk ticket data bao gồm hơn 10 tỷ sự kiện và có quy mô lên đến petabyte dữ liệu. Các file trong hồ chứa dữ liệu (data lake) trong  <a href="https://aws.amazon.com/s3/">Amazon S3</a> được chuyển đổi và lưu trữ ở định dạng <a href="https://hudi.apache.org/">Apache Hudi</a> và được đăng ký trên <a href="https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html">AWS Glue catalog</a> và nó luôn sẵn sàng với tư cách là bảng dữ liệu để phục vụ cho truy vấn phân tích qua <a href="https://aws.amazon.com/athena/">Amazon Athena</a>.</p>
 <h4 id="data-hub-pipelines">Data Hub pipelines</h4>
-<p>Các Data Hub pipelines tập trung vào các sự kiện ở thời gian thực và các trường hợp sử dụng phân tích dữ liệu streaming (streaming analytics ) với Apache Kafka. Bất kỳ ứng dụng nào tại Zendesk đều có thể đưa các sự kiện lên global Kafka message bus. Apache Flink nhập các sự kiện này vào Amazon S3.</p>
+<p>Các Data Hub pipelines tập trung vào các sự kiện ở thời gian thực và các trường hợp sử dụng phân tích dữ liệu streaming (streaming analytics ) với <a href="https://kafka.apache.org/">Apache Kafka</a>. Bất kỳ ứng dụng nào tại Zendesk đều có thể đưa các sự kiện lên global Kafka message bus. <a href="https://flink.apache.org/">Apache Flink</a> nhập các sự kiện này vào Amazon S3.</p>
 <p>Data Hub cung cấp dữ liệu doanh nghiệp chất lượng cao, có tính khả dụng và khả năng nhân rộng cao.</p>
 <h4 id="self-managed-pipeline">Self-managed pipeline</h4>
-<p>Các đường dẫn dữ liệu tự quản lý cho phép các đội kỹ sư sản phẩm sử dụng hồ chứa dữ liệu (data lake) cho những trường hợp sử dụng không phù hợp với các mẫu tích hợp tiêu chuẩn. Tất cả các đội kỹ sư sản phẩm trong nội bộ của Zendesk có thể sử dụng các công cụ cơ bản như Amazon EMR, Amazon S3, Athena, và AWS Glue để xuất bản bộ dữ liệu phân tích  của riêng họ và chia sẻ với các đội khác.</p>
-<p>Một ví dụ đáng chú ý về vấn đề này là từ nhóm kỹ sư phát hiện sự gian lận ( fraud detection ) của Zendesk. Họ xuất bản dữ liệu và phát hiện gian lận thông qua nền tảng hồ chứa dữ liệu tự quản lý của chúng tôi và sử dụng  Amazon QuickSight để trực quan hóa.</p>
+<p>Các đường dẫn dữ liệu tự quản lý cho phép các đội kỹ sư sản phẩm sử dụng hồ chứa dữ liệu (data lake) cho những trường hợp sử dụng không phù hợp với các mẫu tích hợp tiêu chuẩn. Tất cả các đội kỹ sư sản phẩm trong nội bộ của Zendesk có thể sử dụng các công cụ cơ bản như Amazon EMR, Amazon S3, Athena, và <a href="https://docs.aws.amazon.com/glue/">AWS Glue</a> để xuất bản bộ dữ liệu phân tích  của riêng họ và chia sẻ với các đội khác.</p>
+<p>Một ví dụ đáng chú ý về vấn đề này là từ nhóm kỹ sư phát hiện sự gian lận ( fraud detection ) của Zendesk. Họ xuất bản dữ liệu và phát hiện gian lận thông qua nền tảng hồ chứa dữ liệu tự quản lý của chúng tôi và sử dụng  <a href="https://aws.amazon.com/quicksight/">Amazon QuickSight</a> để trực quan hóa.</p>
 <h4 id="bạn-cần-mô-hình-bảo-mật-và-tuân-thủ-chi-tiết">Bạn cần mô hình bảo mật và tuân thủ chi tiết</h4>
 <p>Các hồ chứa dữ liệu có thể thúc đẩy tăng trưởng thông qua việc ra quyết định và đổi mới sản phẩm nhanh hơn. Tuy nhiên, chúng cũng có thể mang đến những thách thức mới về bảo mật và tuân thủ:</p>
 <p>Khả năng Hiển thị và Khả năng Kiểm tra. Ai có quyền truy cập vào dữ liệu nào? Mọi người có cấp độ truy cập nào và làm thế nào / khi nào và ai đang truy cập nó?
 Kiểm soát quyền truy cập cụ thể. Làm cách nào để bạn xác định và thực thi quyền truy cập đặc quyền ít nhất vào các tập con dữ liệu trên quy mô lớn mà không tạo ra tắc nghẽn hoặc sự phụ thuộc vào  yếu tố con người /đội ngũ chủ chốt.</p>
 <p>Lake Formation giúp giải quyết những khúc mắc này bằng cách kiểm tra quyền truy cập dữ liệu và cung cấp bảo mật cấp  dòng và cột cũng như mô hình kiểm soát truy cập được ủy quyền để tạo ra các trình quản lý dữ liệu cho hệ thống Bảo Mật và Quản Trị của bạn</p>
 <p>Zendesk đã sử dụng Lake Formation để xây dựng một mô hình kiểm soát truy cập chi tiết sử dụng Bảo mật cấp dòng. Nó phát hiện các loại dữ liệu và thông tin cá nhân (Personally Identifiable Information - PII) ngay cả khi mở rộng qui mô hồ chứa dữ liệu (data lake).</p>
-<p>Một số khách hàng của Zendesk từ chối đưa dữ liệu và thông tin của họ vào hệ thống Máy học (Machine Learning) hoặc  trong các dự án khảo sát thị trường. Zendesk sử dụng Lake Formation để áp dụng bảo mật cấp hàng nhằm lọc ra các hồ sơ liên quan đến danh sách tài khoản khách hàng đã chọn không tham gia. Chúng cũng giúp người dùng dữ liệu có thể hiểu được bảng dữ liệu nào chứa PII bằng cách tự động phát hiện và gắn thẻ các cột trong danh mục dữ liệu bằng AWS Glue’s PII detection algorithm.
-Giá trị của việc xử lý các dữ liệu thời gian thực</p>
+<p>Một số khách hàng của Zendesk từ chối đưa dữ liệu và thông tin của họ vào hệ thống Máy học (Machine Learning) hoặc  trong các dự án khảo sát thị trường. Zendesk sử dụng Lake Formation để áp dụng bảo mật cấp hàng nhằm lọc ra các hồ sơ liên quan đến danh sách tài khoản khách hàng đã chọn không tham gia. Chúng cũng giúp người dùng dữ liệu có thể hiểu được bảng dữ liệu nào chứa PII bằng cách tự động phát hiện và gắn thẻ các cột trong danh mục dữ liệu bằng AWS Glue’s PII detection algorithm.</p>
+<h4 id="giá-trị-của-việc-xử-lý-các-dữ-liệu-thời-gian-thực">Giá trị của việc xử lý các dữ liệu thời gian thực</h4>
 <p>Khi bạn xử lý dữ liệu càng nhanh và sớm sau khi dữ liệu được tạo, quyết định sẽ được đưa ra nhanh hơn và chính xác hơn
-Các thiết kế mẫu trong phân tích dữ liệu streaming, được thực hiện bằng cách sử dụng các dịch vụ như  Amazon Managed Streaming for Apache Kafka (Amazon MSK) hoặc Amazon Kinesis, tạo ra một enterprise eventbus để trao đổi dữ liệu giữa các ứng dụng không đồng nhất trong thời gian thực.</p>
+Các thiết kế mẫu trong phân tích dữ liệu streaming, được thực hiện bằng cách sử dụng các dịch vụ như  <a href="https://aws.amazon.com/msk/">Amazon Managed Streaming for Apache Kafka (Amazon MSK)</a> hoặc <a href="https://aws.amazon.com/kinesis/">Amazon Kinesis</a>, tạo ra một enterprise eventbus để trao đổi dữ liệu giữa các ứng dụng không đồng nhất trong thời gian thực.</p>
 <p>Ví dụ: người ta thường sử dụng tính năng streaming để tăng cường quá trình thu thập dữ liệu (data ingestion) từ CSDL truyền thống bằng phương pháp CDC vào data lake cùng với quá trình streaming ingestion bổ sung cho các application events. 
 CDC là một mẫu thiết kế kiến trúc thu thập dữ liệu phổ biến, nhưng thông tin có thể ở mức quá chi tiết. Điều này yêu cầu bối cảnh ứng dụng phải được tái tạo lại trong data lake và business logic phải được sử giống giống nhau ở hai nơi, bên trong ứng dụng và trong lớp xử lý data lake. Điều này tạo ra nguy cơ trình bày sai ngữ nghĩa của ngữ cảnh ứng dụng.</p>
 <p>Zendesk đã phải đối mặt với thách thức này khi thực hiện CDC data lake ingestion của họ từ các Aurora clusters. Họ đã tạo một event bus được xây dựng với Apache Kafka để tăng cường CDC của họ với các application domain events cấp cao hơn để trao đổi trực tiếp giữa các ứng dụng không đồng nhất.</p>
 <h4 id="kiến-trúc-streaming-của-zendesk">Kiến trúc streaming của Zendesk</h4>
 <p>CDC database ticket table schema đôi khi có thể chứa các thuộc tính phức tạp và không cần thiết dành riêng cho ứng dụng và không thể hiện được domain model của ticket. Điều này khiến cho downstream consumers không hiểu để sử dụng dữ liệu. Một ticket domain object có thể bao gồm một số database tables khi được modeled ở dạng third normal form, điều này làm cho việc truy vấn đối với các nhà phân tích trở nên khó khăn. Đây cũng là một phương pháp tích hợp dễ gây ra vấn đề vì các ứng dụng và dịch vụ sử dụng dữ liệu có thể dễ dàng bị ảnh hưởng khi logic của ứng dụng thay đổi, điều này khiến cho việc thiết lập một chế độ xem dữ liệu chung trở nên khó khăn.</p>
 <p>Để hướng tới giao tiếp dựa trên sự kiện giữa các microservices, Zendesk đã tạo dự án Platform Data Architecture (PDA), sử dụng standard object model để thể hiện chế độ xem ngữ nghĩa, cấp cao hơn của dữ liệu ứng dụng của họ. Standard objects là các domain objects được thiết kế để giao tiếp giữa nhiều domain và không chịu ảnh hưởng bởi cơ chế  CDC. Cuối cùng, Zendesk đặt mục tiêu chuyển đổi data architecture của họ từ một tập hợp các isolated products và data silos thành một nền tảng dữ liệu thống nhất gắn kết.</p>
-<figure><img src="/images/1-AWSArchitectureBlog/1.1-Blog-1/0002.png" width="750pc"/><figcaption>
+<figure><img src="/images/1-AWSArchitectureBlog/1.1-Blog-1/0002.png" width="900pc"/><figcaption>
             <h4>Hình 2. Một góc nhìn ứng dụng của kiến trúc streaming Zendesk.</h4>
         </figcaption>
 </figure>
@@ -459,11 +459,11 @@ CDC là một mẫu thiết kế kiến trúc thu thập dữ liệu phổ biế
 <h4 id="tóm-lược">Tóm lược</h4>
 <p>Khi hoạt động kinh doanh của Zendesk phát triển,  data lake của họ đã phát triển từ các tệp Parquet đơn giản trên Amazon S3 thành data lake và có thể cập nhật tăng dần dựa trên kiến trúc Hudi hiện đại. Giờ đây, các chính sách bảo mật IAM của họ được sử dụng nhằm kiểm soát truy cập chi tiết thông qua Lake Formation.</p>
 <p>Chúng tôi đã nhiều lần chứng kiến những cải tiến về mặt kiến trúc một cách từ từ đạt được thành công vì nó  làm giảm rủi ro kinh doanh liên quan đến sự thay đổi và cung cấp đủ thời gian cho nhóm của bạn để tìm hiểu và đánh giá các hoạt động và các dịch vụ được quản lý trên Cloud.</p>
-<p>Nếu bạn muốn tìm kiếm thêm nội dung về kiến trúc? AWS Architecture Center cung cấp các sơ đồ kiến trúc tham chiếu, các giải pháp kiến trúc đã được hiệu chỉnh, các phương pháp hay nhất  Well-Architected, các mẫu, biểu tượng và hơn thế nữa!</p>
+<p>Nếu bạn muốn tìm kiếm thêm nội dung về kiến trúc? <a href="https://aws.amazon.com/architecture/">AWS Architecture Center</a> cung cấp các sơ đồ kiến trúc tham chiếu, các giải pháp kiến trúc đã được hiệu chỉnh, các phương pháp hay nhất <a href="https://aws.amazon.com/architecture/well-architected/">Well-Architected</a>, các mẫu, biểu tượng và hơn thế nữa!</p>
 <h4 id="các-bài-viết-khác-trong-loạt-bài-này">Các bài viết khác trong loạt bài này</h4>
 <ol>
-<li><a href="">Insights for CTOs: Part 1 – Building and Operating Cloud Applications</a></li>
-<li><a href="">Insights for CTOs: Part 2 – Enable Good Decisions at Scale with Robust Security</a></li>
+<li><a href="https://aws.amazon.com/blogs/architecture/insights-for-ctos-part-1-building-and-operating-cloud-applications/">Insights for CTOs: Part 1 – Building and Operating Cloud Applications</a></li>
+<li><a href="https://aws.amazon.com/blogs/architecture/insights-for-ctos-part-2-enable-good-decisions-at-scale-with-robust-security/">Insights for CTOs: Part 2 – Enable Good Decisions at Scale with Robust Security</a></li>
 </ol>
 
 
@@ -609,19 +609,19 @@ CDC là một mẫu thiết kế kiến trúc thu thập dữ liệu phổ biế
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1655203575"></script>
-    <script src="/js/perfect-scrollbar.min.js?1655203575"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1655203575"></script>
-    <script src="/js/jquery.sticky.js?1655203575"></script>
-    <script src="/js/featherlight.min.js?1655203575"></script>
-    <script src="/js/highlight.pack.js?1655203575"></script>
+    <script src="/js/clipboard.min.js?1655204679"></script>
+    <script src="/js/perfect-scrollbar.min.js?1655204679"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1655204679"></script>
+    <script src="/js/jquery.sticky.js?1655204679"></script>
+    <script src="/js/featherlight.min.js?1655204679"></script>
+    <script src="/js/highlight.pack.js?1655204679"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1655203575"></script>
-    <script src="/js/learn.js?1655203575"></script>
-    <script src="/js/hugo-learn.js?1655203575"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1655204679"></script>
+    <script src="/js/learn.js?1655204679"></script>
+    <script src="/js/hugo-learn.js?1655204679"></script>
 
-    <link href="/mermaid/mermaid.css?1655203575" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1655203575"></script>
+    <link href="/mermaid/mermaid.css?1655204679" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1655204679"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
